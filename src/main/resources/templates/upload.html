@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload</title>
+</head>
+<body>
+<form method="POST" enctype="multipart/form-data" action="/upload">
+    File to upload: <input type="file" name="upfile"><br/>
+    Notes about the file: <input type="text" name="note"><br/>
+    <br/>
+    <input type="submit" value="Press"> to upload the file!
+</form>
+
+<h1 id="size">size</h1>
+<script>
+    document.forms[0].addEventListener('submit', function( evt ) {
+        var file = document.getElementById('file').files[0];
+        console.log("size of file " + file.size)
+        document.getElementById("size").innerText="amin"+file.size;
+     });
+</script>
+
+</body>
+</html>

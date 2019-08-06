@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>socket js</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+    <script type="text/javascript">
+        var stompClient = null;
+
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility
+                = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+            var socket = new SockJS('/chatmat');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/momsandstudents', function (messageOutput) {
+                    // showMessageOutput(JSON.parse(messageOutput.body));
+                    console.log(("messageOutput.body"));
+                    document.body.style.opacity = Math.random();
+                    console.log((messageOutput.body));
+                });
+            });
+        }
+
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendMessage2() {
+            var from = document.getElementById('from').value;
+            var text = document.getElementById('text').value;
+            stompClient.send("/app/chat", {},
+                JSON.stringify({'from': from, 'text': text}));
+        }
+
+        students = [];
+
+        function sendMessage() {
+            var stds =
+                "9224044\n" +
+                "9426003\n" +
+                "9432042\n" +
+                "9524058\n" +
+                "9424066\n" +
+                "9224053\n" +
+                "9424051\n" +
+                "9433061\n" +
+                "9411055\n" +
+                "9533083\n" +
+                "9413011\n" +
+                "9539039\n" +
+                "9424001\n" +
+                "9322019\n" +
+                "9322032\n" +
+                "9429036\n" +
+                "9432010\n" +
+                "9522034\n" +
+                "9433102\n" +
+                "9526089\n" +
+                "9528053\n" +
+                "9323062\n" +
+                "9432044\n" +
+                "9423009\n" +
+                "9523036\n" +
+                "9423113\n" +
+                "9433008\n" +
+                "9324002\n" +
+                "9524059\n" +
+                "9424033\n" +
+                "9524069\n" +
+                "9524441\n" +
+                "9325003\n" +
+                "9425030\n" +
+                "9325007\n" +
+                "9425001\n" +
+                "9425037\n" +
+                "9433027\n" +
+                "9525008\n" +
+                "9525016\n" +
+                "9525019\n" +
+                "9325032\n" +
+                "9425043\n" +
+                "9525051\n" +
+                "9325036\n" +
+                "9525044\n" +
+                "9525057\n" +
+                "9325004\n" +
+                "9329051\n" +
+                "9332049\n" +
+                "9425016\n" +
+                "9425064\n" +
+                "9426014\n" +
+                "9426086\n" +
+                "9429051\n" +
+                "9433050\n" +
+                "9524009\n" +
+                "9526033\n" +
+                "9526041\n" +
+                "9425017\n" +
+                "9425012\n" +
+                "9425005\n" +
+                "9434015\n" +
+                "9511062\n" +
+                "9523002\n" +
+                "9523061\n" +
+                "9533075\n" +
+                "9525017\n" +
+                "9525036\n" +
+                "9326031\n" +
+                "9326001\n" +
+                "9523007\n" +
+                "9526082\n" +
+                "9326038\n" +
+                "9326071\n" +
+                "9426009\n" +
+                "9426047\n" +
+                "9326002\n" +
+                "9326906\n" +
+                "9426082\n" +
+                "9426096\n" +
+                "9326014\n" +
+                "9426111\n" +
+                "9526009\n" +
+                "9526097\n" +
+                "9526005\n" +
+                "9526074\n" +
+                "9426104\n" +
+                "9411007\n" +
+                "9426016\n" +
+                "9526040\n" +
+                "9526045\n" +
+                "9433045\n" +
+                "9511063\n" +
+                "9526702\n" +
+                "9529011\n" +
+                "9529035\n" +
+                "9333017\n" +
+                "9426002\n" +
+                "9433060\n" +
+                "9326064\n" +
+                "9426074\n" +
+                "9526010\n" +
+                "9526018\n" +
+                "9526016\n" +
+                "9526043\n" +
+                "9529015\n" +
+                "9426037\n" +
+                "9426046\n" +
+                "9526021\n" +
+                "9326047\n" +
+                "9432006\n" +
+                "9423017\n" +
+                "9426011\n" +
+                "9426033\n" +
+                "9426071\n" +
+                "9326086\n" +
+                "9329039\n" +
+                "9424009\n" +
+                "9427012\n" +
+                "9433074\n" +
+                "9533073\n" +
+                "9513022\n" +
+                "9326706\n" +
+                "9411045\n" +
+                "9526065\n" +
+                "9426066\n" +
+                "9331078\n" +
+                "9433098\n" +
+                "9327106\n" +
+                "9522017\n" +
+                "9523057\n" +
+                "9533014\n" +
+                "9439021\n" +
+                "9328042\n" +
+                "9328062\n" +
+                "9523119\n" +
+                "9532067\n" +
+                "9534033\n" +
+                "9331067\n" +
+                "9431076\n" +
+                "9433093\n" +
+                "9433100\n" +
+                "9433109\n" +
+                "9530029\n" +
+                "9328046\n" +
+                "9428038\n" +
+                "9433084\n" +
+                "9528015\n" +
+                "9533090\n" +
+                "9511012\n" +
+                "9528001\n" +
+                "9525054\n" +
+                "9329006\n" +
+                "9432055\n" +
+                "9429008\n" +
+                "9429020\n" +
+                "9429023\n" +
+                "9429014\n" +
+                "9429033\n" +
+                "9429038\n" +
+                "9427041\n" +
+                "9433095\n" +
+                "9529007\n" +
+                "9529053\n" +
+                "9426088\n" +
+                "9629056\n" +
+                "9330017\n" +
+                "9331026\n" +
+                "9531033\n" +
+                "9571008\n" +
+                "9532038\n" +
+                "9533055\n" +
+                "9539020\n" +
+                "9431071\n" +
+                "9431040\n" +
+                "9531047\n" +
+                "9531084\n" +
+                "9332019\n" +
+                "9432040\n" +
+                "9526007\n" +
+                "9432064\n" +
+                "9332026\n" +
+                "9470016\n" +
+                "9332072\n" +
+                "9432074\n" +
+                "9432063\n" +
+                "9532074\n" +
+                "9470014\n" +
+                "9532039\n" +
+                "9523051\n" +
+                "9433017\n" +
+                "9533076\n" +
+                "9411037\n" +
+                "9433044\n" +
+                "9533069\n" +
+                "9511033\n" +
+                "9423069\n" +
+                "9523044\n" +
+                "9423107\n" +
+                "9524023\n" +
+                "9526058\n" +
+                "9525031\n" +
+                "9528004\n" +
+                "9532028\n" +
+                "9533025\n" +
+                "9433043\n" +
+                "9529052\n" +
+                "9513020\n" +
+                "9534006\n" +
+                "9522060\n" +
+                "9532083\n" +
+                "9427053\n" +
+                "9533041\n" +
+                "9439049\n" +
+                "9533036\n" +
+                "9571009\n" +
+                "9528038\n" +
+                "9428043\n" +
+                "9433066\n" +
+                "9533046\n" +
+                "9533053\n" +
+                "9433037\n" +
+                "9533051\n" +
+                "9531042\n" +
+                "9531085\n" +
+                "9433086\n" +
+                "9533060\n" +
+                "9533078\n" +
+                "9534010\n" +
+                "9534019\n" +
+                "9513028\n" +
+                "9531030";
+
+            csSelected = ["2405053__1", "2605272__2", "1061021__11", "2605303__1", "1061021__10", "3015083__1", "1061021__13", "2915203__1", "2915243__1", "1061021__16", "1061021__9", "1061021__12", "2626122__1", "2605303__2", "1061021__14", "1061021__7", "2605033__1", "1091003__3", "1061021__3", "1091103__1", "1061021__8", "3354042__1", "3345013__1", "1061021__6", "2883803__1", "1091103__2", "2302013__2", "1091003__1", "1091003__2", "2605272__3", "2883803__2", "2905053__1", "2302013__3", "3215183__2"];
+
+            var array = stds.split("\n");
+            array.forEach((value, index) => {
+                students[index] = value;
+            })
+            let index = students.indexOf('');
+            if (index > -1) {
+                students.splice(index, 1);
+            }
+            var message = (csSelected);
+            var message2 = (students);
+
+            let objs = {css: message, stds: message2};
+            let strobjs = JSON.stringify(objs);
+
+            stompClient.send("/app/chatmat", {}, strobjs);
+        }
+
+        function showMessageOutput(messageOutput) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.style.backgroundColor = 'red';
+            p.appendChild(document.createTextNode(messageOutput.from + ": "
+                + messageOutput.text + " (" + messageOutput.time + ")"));
+            response.appendChild(p);
+        }
+    </script>
+</head>
+<body onload="disconnect()" style="background-color: #494f54">
+<div>
+    <div>
+        <input type="text" id="from" placeholder="Choose a nickname"/>
+    </div>
+    <br/>
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">
+            Disconnect
+        </button>
+    </div>
+    <br/>
+    <div id="conversationDiv">
+        <input type="text" id="text" placeholder="Write a message..."/>
+        <button id="sendMessage" onclick="sendMessage();">Send</button>
+        <p id="response"></p>
+    </div>
+</div>
+
+</body>
+</html>

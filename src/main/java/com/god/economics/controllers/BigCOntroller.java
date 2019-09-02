@@ -72,6 +72,52 @@ public class BigCOntroller {
         return null;
     }
 
+    @RequestMapping("/day")
+    @ResponseBody
+    public List<BitcoinResponse> fo() {
+        OkHttpClient client = new OkHttpClient();
+        ArrayList<BitcoinResponse> bitcoinResponses = new ArrayList<>();
+
+
+        String url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=2000&api_key=67d8346761e726d36e30efb25b9450917207f937bb3ad5f1496a42b383970ca5";
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        JSONObject jsonObject1 = new JSONObject();
+        JsonArray jsonElements = new JsonArray();
+        try (Response response = client.newCall(request).execute()) {
+            String string = response.body().string();
+            JSONObject jsonObject = new JSONObject(string);
+
+            JSONArray data = jsonObject.getJSONArray("Data");
+            int length = data.length();
+
+            for (int i = 0; i < length; i++) {
+                JSONObject object = data.getJSONObject(i);
+                long time = object.getLong("time");
+                double close = object.getDouble("close");
+                double open = object.getDouble("open");
+                System.out.println(time + " : " + close);
+                Date date = new Date((long) time * 1000);
+                String x = new Gson().toJson(date);
+                System.out.println(x);
+
+                BitcoinResponse json = new BitcoinResponse().setDate(date)
+                        .setOpen(open).setPrice(close).setUnixTime(time);
+
+                bitcoinResponses.add(json);
+                System.out.println();
+
+            }
+            return bitcoinResponses;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     @RequestMapping("/cc")
     @ResponseBody
     public String cf() {

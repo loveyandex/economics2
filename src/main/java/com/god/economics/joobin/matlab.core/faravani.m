@@ -3,7 +3,7 @@ maxfaravani=[];
 close all
 last=btime(end,end)
 clear pf kf
-
+clear
 up=0
 low=0
 
@@ -29,11 +29,10 @@ up/length(c1)
 end
 
 
-
-
+figure(k)
 for k=1:10
    
-% figure(k)
+
 c1=ALL(:,k);
 c1 = c1(imag(c1) == 0);
 q=zeros(1,length(c1));
@@ -71,7 +70,7 @@ for j=1:i
     csd(i)=csd(i)+d(j);
 end
     
-    
+    sum(d)
 EV(k)=sum(d.*(pf))
 end
 % hold on

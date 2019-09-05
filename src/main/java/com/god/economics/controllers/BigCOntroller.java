@@ -52,16 +52,13 @@ public class BigCOntroller {
                 long time = object.getLong("time");
                 double close = object.getDouble("close");
                 double open = object.getDouble("open");
-                System.out.println(time + " : " + close);
                 Date date = new Date((long) time * 1000);
                 String x = new Gson().toJson(date);
-                System.out.println(x);
 
                 BitcoinResponse json = new BitcoinResponse().setDate(date)
                         .setOpen(open).setPrice(close).setUnixTime(time);
 
                 bitcoinResponses.add(json);
-                System.out.println();
 
             }
             return bitcoinResponses;
@@ -98,16 +95,13 @@ public class BigCOntroller {
                 long time = object.getLong("time");
                 double close = object.getDouble("close");
                 double open = object.getDouble("open");
-                System.out.println(time + " : " + close);
                 Date date = new Date((long) time * 1000);
                 String x = new Gson().toJson(date);
-                System.out.println(x);
 
                 BitcoinResponse json = new BitcoinResponse().setDate(date)
                         .setOpen(open).setPrice(close).setUnixTime(time);
 
                 bitcoinResponses.add(json);
-                System.out.println();
 
             }
             return bitcoinResponses;

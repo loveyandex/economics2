@@ -3,18 +3,17 @@
 % clear
 % close all
 global thistime
- ALL=[];
+%  ALL=[];
 
     
 % btime=requstBtcTime()
-for kkk=1:300
+for kkk=1:100
  
 if mod(kkk,301)==0
     
 btime=requstBtcTime();
     end
 btc_time=btime;
-% btc_time=csvread('btc_hours7.csv',0,2);
 
 n=10;
 nv=20;

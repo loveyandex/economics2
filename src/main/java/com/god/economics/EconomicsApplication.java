@@ -27,6 +27,7 @@ public class EconomicsApplication {
     public void getdata() {
         new Thread(() -> {
             try {
+                Thread.sleep(2000);
                 Element body = Jsoup.connect("https://www.yjc.ir/fa/pricefood/Meat").get().body();
                 Elements elementsByClass = body.getElementsByClass("pr-g-title");
                 Elements priceinfos = body.getElementsByClass("pr-g-info");
@@ -81,6 +82,8 @@ public class EconomicsApplication {
 
 
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 

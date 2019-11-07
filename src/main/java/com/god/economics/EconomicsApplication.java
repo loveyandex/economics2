@@ -25,13 +25,13 @@ public class EconomicsApplication {
 
     @Bean
     public void getdata() {
-        new Thread(() -> {
+        Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(2000);
                 Element body = Jsoup.connect("https://www.yjc.ir/fa/pricefood/Meat").get().body();
                 Elements elementsByClass = body.getElementsByClass("pr-g-title");
                 Elements priceinfos = body.getElementsByClass("pr-g-info");
-                for (int i = 0; i < elementsByClass.size(); i=i+2) {
+                for (int i = 0; i < elementsByClass.size(); i = i + 2) {
                     Element byClass = elementsByClass.get(i);
                     Element pr = priceinfos.get(i);
                     String name = byClass.text();
@@ -88,7 +88,12 @@ public class EconomicsApplication {
             }
 
 
-        }).start();
+        });
+
+        if (Math.random() > 0.75) {
+            thread.start();
+        }else
+            System.err.println("random god didn't allow meat price be gathered");
 
     }
 }

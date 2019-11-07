@@ -17,3 +17,4 @@ public class BitcoinResponse {
     private double open;
     private long unixTime;
 }
+

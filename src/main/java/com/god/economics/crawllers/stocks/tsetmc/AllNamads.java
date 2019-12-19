@@ -82,7 +82,8 @@ public class AllNamads {
 
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
-            String[] split = string.split(";")[3].split(",");
+            String[] namads = string.split(";");
+            String[] split = namads[3].split(",");
 
             System.out.println(string);
         } catch (IOException e) {

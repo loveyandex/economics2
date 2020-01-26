@@ -23,14 +23,15 @@ public class IdProccess {
         int ap = 0;
         while (scanner.hasNext()) {
             String id = scanner.nextLine();
-            if (ap < 464) {
+            if (ap < 842) {
                 ap++;
                 continue;
             }
 
 
+            String resp = null;
             try {
-                String resp = Reqs.getReq("https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables=%7B%22user_id%22%3A%22" + id + "%22%2C%22include_chaining%22%3Atrue%2C%22include_reel%22%3Atrue%2C%22include_suggested_users%22%3Afalse%2C%22include_logged_out_extras%22%3Afalse%2C%22include_highlight_reels%22%3Atrue%2C%22include_related_profiles%22%3Afalse%7D");
+                resp = Reqs.getReq("https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables=%7B%22user_id%22%3A%22" + id + "%22%2C%22include_chaining%22%3Atrue%2C%22include_reel%22%3Atrue%2C%22include_suggested_users%22%3Afalse%2C%22include_logged_out_extras%22%3Afalse%2C%22include_highlight_reels%22%3Atrue%2C%22include_related_profiles%22%3Afalse%7D");
                 JSONObject jsonObject = new JSONObject(resp);
                 String username = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("user")).get("reel"))
                         .get("user")).get("username");
@@ -39,7 +40,8 @@ public class IdProccess {
                 writer.write(username + "\r\n");
                 writer.flush();
                 Thread.sleep(500);
-            } catch (IOException | InterruptedException e) {
+            } catch (Exception e) {
+                System.out.println(resp);
                 e.printStackTrace();
             }
 

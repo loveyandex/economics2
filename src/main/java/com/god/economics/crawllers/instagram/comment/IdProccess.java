@@ -23,7 +23,7 @@ public class IdProccess {
         int ap = 0;
         while (scanner.hasNext()) {
             String id = scanner.nextLine();
-            if (ap < 450) {
+            if (ap < 464) {
                 ap++;
                 continue;
             }
@@ -38,7 +38,8 @@ public class IdProccess {
                 System.out.println(username);
                 writer.write(username + "\r\n");
                 writer.flush();
-            } catch (IOException e) {
+                Thread.sleep(500);
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 

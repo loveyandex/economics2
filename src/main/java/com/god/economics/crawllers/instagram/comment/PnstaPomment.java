@@ -24,12 +24,8 @@ public class PnstaPomment {
         String id = "2194939228587455523";
         id = "2227859801112021496";//donya last post
         id = "2197568975716933739";//mahsa_._khanoom_ last post https://www.instagram.com/p/B5_VVcXBuBr/
-
-
+        id = "2229439841077227618";//mahsa_._khanoom_ last post https://www.instagram.com/p/B7wj7kvgvBi/
         String uri = "https://www.instagram.com/web/comments/" + id + "/add/";
-
-
-
 
         HttpPost httpPost = new HttpPost(uri);
 

@@ -1,5 +1,6 @@
 package com.god.economics.crawllers.instagram.comment;
 
+import io.netty.util.AsciiString;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -13,6 +14,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 
 /**
  * created By gOD on 12/17/2019 2:46 PM
@@ -26,7 +28,8 @@ public class UserDataAndPage {
 
 
         OkHttpClient client = new OkHttpClient();
-        String url = "https://www.instagram.com/a.m.satin/?__a=1";
+        String usename = "a.m.satin";
+        String url = "https://www.instagram.com/" +usename+ "/?__a=1";
 
 
         Request request = new Request.Builder()
@@ -38,10 +41,11 @@ public class UserDataAndPage {
             String string = response.body().string();
             JSONObject jsonObject = new JSONObject(string);
             Object graphql = jsonObject.get("graphql");
-            String[] split = ((String) ((JSONObject) (((JSONObject) graphql).get("user")))
-                    .get("biography"))
 
-                    .split("۰۹");
+            String bio = ((String) ((JSONObject) (((JSONObject) graphql).get("user")))
+                    .get("biography"));
+
+            String[] split = bio.split("۰۹");
             String rxternalurl = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
                     .get("external_url");
 

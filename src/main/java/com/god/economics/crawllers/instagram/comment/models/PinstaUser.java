@@ -21,7 +21,8 @@ public class PinstaUser {
     private int edge_followed_by;
     private int edge_follow;
 
-    public PinstaUser( String username, String bio, String externalUrl, String fullName, int edge_followed_by, int edge_follow) {
+    public PinstaUser(String id, String username, String bio, String externalUrl, String fullName, int edge_followed_by, int edge_follow) {
+        this.id = id;
         this.username = username;
         this.bio = bio;
         this.externalUrl = externalUrl;

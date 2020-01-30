@@ -82,8 +82,8 @@ public class USernameProccess {
             String externalUrl = pinstaUser.getExternalUrl();
             System.out.println(bio);
             System.out.println(pinstaUser.getUsername());
-            System.out.println("------------------------------------------------------------------------");
             checkPhoneNumberWhatsappTel(bio, externalUrl);
+            System.out.println("------------------------------------------------------------------------");
 
 
         }
@@ -92,29 +92,91 @@ public class USernameProccess {
     }
 
     private String checkPhoneNumberWhatsappTel(String bio, String externalUrl) {
-        String leabasMaj = "لباس مجلسي،لباس مجلسى،لباس مجلسی";
+        String leabasMaj = "لباس مجلسي،لباس مجلسى،لباس مجلسی،لباس";
         String manto = "مانتو،manto،Manto";
 
-        String kif = "كيف و كفش ،کیف و کفش ،کيف و کفش ،کیف ،کيف ";
+        String kif = "کیف زنانه،كيف و كفش ،کیف و کفش ،کيف و کفش ،کیف ،کيف ";
+        String kiflebas = "لباس و كيف و كفش";
         String kafsh = "کفش ،";
         String roosari = "روسری،روسری،روسري،روسری";
+        String roosari1 = "شال و روسري";
         String accesssory = "اکسسوری،اکسسوری،اکسسوري";
         String shal = "شال";
 
         String kif2 = "کيف،";
         String kif3 = "کیف،";
+        String shabtork = "لباس شب ترک،";
+        String designllebas = "طراح لباس";
         String lebas = "لباس";
         String mezon = "مزون";
         String designAndDookht = "طراحی و دوخت";
+        String designAndDookht2 = "طراحي و دوخت";
+        String designAndDookht23 = "Design and sewing clothes";
+        String designAndDookht23e = "Design and sewing";
+        String design2 = "طراحي";
+        String designAndDookht3 = "طراحى و دوخت";
+        String designAndDookht33 = "دوخت و طراحی";
+
+
         String tanpoosh = "تن پوش";
         String tanpooshha = "تن پوش های زنانه";
-        String srockmardane="استوک مردانه";
-        String tshirt="تیشرت";
-        String womanwear="woman wear";
-        String dookht="دوخت";
+        String srockmardane = "استوک مردانه";
+        String tshirt = "تیشرت";
+        String womanwear = "woman wear";
+        String dookht = "دوخت";
+        String lebastork = "لباس_ترک";
+        String pooshakzanane = "پوشاک زنانه";
+        String einak = "عینک";
+        String einak1 = "عىنک";
+        String einak2 = "عينک";
+        String einak32 = "عينك";
+        String FashionDesigner = "Fashion Designer";
+        String fashionstyle = "fashion style";
+        String fashion = "fashion";
+        String Lifestyle = "Lifestyle";
+        String Beauty = "Beauty";
+
+        String scarf = "scarf";
+        String shawl = "scarf";
+        String manteau = "manteau";
 
 
-        String[] types = {leabasMaj, manto, kif, kafsh, roosari, accesssory, shal};
+        String POOSHAKROOZDONYA = "پوشاك روزدنيا";
+        String POOSHAKROOZDONYA2 = "پوشاك";
+        String POOSHAKROOZDONYA22 = "پوشاک";
+        String mezonaroos = "مزون عروس";
+
+        String KHABLEBAS = "لباسخواب";
+        String KHABLEBAS2 = "لباس خواب";
+        String BOOOTIK = "بوتیک";
+        String PAZSOOKHT = "پذیرش سفارش دوخت";
+        String TORKIYE = "ترکیه";
+        String shiktarinmodels = "شیک\u200Cترین مدل\u200Cها";
+        String jinpooshak = "پوشاک جین";
+        String lebasshab = "لباس_شب";
+        String ajnas = "اجناس";
+        String zananelebas = "لباس هاي زنانه";
+        String zananelebas2 = " لباس هاي زنانه";
+        String tarahlebas = "طراح\u200Cلباس";
+        String tarahlebas2 = "طراح باس";
+        String Butic = "Butic";
+        String mantodookhtshoomiz = "دوخت مانتو وشومیز";
+
+        //country and selign base none have a reasonal name
+        String istanbul = "استانبول";
+        String eourpandturkey = "برندهای اروپا و ترکیه";
+        String directsellingturkey = "خريد مستقيم از تركيه";
+        String FOROSH = "فروش تنها به صورت آنلاین";
+        String BRANDROK = "برندهای ترک";
+        String TORK = "ترک";
+        String sefareshonline = "سفارش انلاین";
+        String TORKd = "shop from turkey";
+        String kharid = "خرید به صورت تک وعمده";
+        String Orderonline = "Order online";
+        String online= "فروشگاه هاى معتبر دبى";
+        String gallery= "gallery";
+
+        String[] types = {leabasMaj, kiflebas, manto, kif, kafsh, roosari, accesssory, shal};
 
         String solution = "";
         for (String type : types) {
@@ -138,8 +200,12 @@ public class USernameProccess {
         }
         if (solution.equals("")) {
             if (bio.contains(designAndDookht)) solution += designAndDookht + "";
+            else if (bio.contains(designAndDookht2)) solution += designAndDookht + "";
+            else if (bio.contains(designAndDookht3)) solution += designAndDookht + "";
             else if (bio.contains(lebas)) solution += lebas + "";
             else if (bio.contains(tanpoosh)) solution += tanpoosh + "";
+            else if (bio.contains(pooshakzanane)) solution += pooshakzanane + "";
+            else if (bio.contains(lebastork)) solution += lebastork + "";
             else if (bio.contains(tanpooshha)) solution += tanpooshha + "";
             else if (bio.contains(srockmardane)) solution += srockmardane + "";
             else if (bio.contains(womanwear)) solution += womanwear + "";
@@ -148,7 +214,7 @@ public class USernameProccess {
 
 
         }
-
+        System.out.println("solution: "+solution);
         return solution;//لباس_ترک , عینکwooooof1551 رید کالا از ترکیه پوشاک زنانه
 
 

@@ -35,7 +35,7 @@ public class HaghTag {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void maink(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 

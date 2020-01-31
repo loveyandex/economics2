@@ -15,14 +15,41 @@ import java.util.regex.Pattern;
 public class S {
 
     public static void main(String[] args) throws IOException {
+
+
+
+        String bio=" 0k09077656444 ";
+        Pattern pattern = Pattern.compile("[^0][0]?9[0-9]{9}");
+        Pattern pattern2 = Pattern.compile("09[0-9]{2}\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
+        Matcher matcher = pattern.matcher(bio);
+        Matcher matcher2 = pattern2.matcher(bio);
+
+        while (matcher.find()) {
+            String number = matcher.group(0);
+            System.out.println(number);
+        }
+        while (matcher2.find()) {
+            String mach = matcher2.group(0)
+                    ;
+            System.out.println(mach);
+        }
+
+
+        System.out.println();
+
+
+
+
+
+
         String str = "۱۲ ۳۴۵ ۶ ۷۸۹ وحة المفاتيح العرب";
         str = "۰۹۱۲۳۴۵۶۷۷۸۱۲یلیبلیب-۰۹۱۲۳۴۵۶۱۲۳۴۵۶۳۴۵۶۷۷۸۱۲ سیسیدسمنیدسمنید  کیبئیبکیبکیبئکیب";
         String[] replaced = str.split("[\\p{InArabic}&&[^۰-۹]]");
 
         str = "This is 1 test ۲۳۴۴  ۰۹۱۲۲۳۴۴۲۳۴۴۲۳۴۴  123-456-7890";
 
-        Pattern pattern = Pattern.compile("[۰-۹]+");
-        Matcher matcher = pattern.matcher(str);
+         pattern = Pattern.compile("[۰-۹]+");
+         matcher = pattern.matcher(str);
         while (matcher.find()) {
             System.out.println(matcher.group(0));
         }

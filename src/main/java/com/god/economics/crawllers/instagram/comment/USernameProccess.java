@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -84,8 +85,9 @@ public class USernameProccess {
             String externalUrl = pinstaUser.getExternalUrl();
             System.out.println(bio);
 //            System.out.println(pinstaUser.getUsername());
-//            String checkPhoneNumberWhatsappTel = type(pinstaUser.getFullName(), bio, externalUrl);
-            phoneNumbers(bio);
+//            String checkPhoneNumberWhatsappTel = type(pinstaUser.getFullName(), bio);
+            phoneNumbers(bio, externalUrl);
+            telID(bio, externalUrl);
             System.out.println("------------------------------------------------------------------------");
 
 
@@ -94,7 +96,7 @@ public class USernameProccess {
 
     }
 
-    private String type(String fullname, String bio, String externalUrl) {
+    private String type(String fullname, String bio) {
         String leabasMaj = "لباس مجلسي،لباس مجلسى،لباس مجلسی،لباس";
         String manto = "مانتو،manto،Manto";
 
@@ -471,35 +473,89 @@ public class USernameProccess {
 
     }
 
-    private String phoneNumbers(String bio) {
+    private ArrayList<String> phoneNumbers(String bio, String externalUrl) {
+        ArrayList<String> phones = new ArrayList<>();
+        String telid = "";
+        System.out.println("externalUrl: " + externalUrl);
 
-        Pattern pattern = Pattern.compile("۹[۰-۹]+ ");
+        Pattern pattern = Pattern.compile("۹[۰-۹]+");
+        Pattern pattern4 = Pattern.compile("۹[۰-۹]{9}");
+        Pattern pattern5 = Pattern.compile("[٠-٩]+");
         Pattern pattern2 = Pattern.compile("۹[۰-۹]{2}\\s+[۰-۹]{3}\\s+[۰-۹]{2}\\s+[۰-۹]{2}");
         Matcher matcher = pattern.matcher(bio);
         Matcher matcher2 = pattern2.matcher(bio);
+        Matcher matcher4 = pattern4.matcher(bio);
+        Matcher matcher5 = pattern5.matcher(bio);
+
+        //("uD83D\uDC48۲۸۳۰۲۲۸-٠٩٣٣");۰۹۳۶۵۳۰۷۵۸۱
+        Pattern pattern3 = Pattern.compile("[۰-۹]{7}-٠٩[۰-۹]{2}");
+        Matcher matcher3 = pattern3.matcher(bio);
 
         while (matcher.find()) {
             String number = matcher.group(0);
+            phones.add(number);
             System.out.println(number);
         }
         while (matcher2.find()) {
             String mach = matcher2.group(0);
+            phones.add(mach);
             System.out.println(mach);
         }
 
+        while (matcher3.find()) {
+            String mach = matcher3.group(0);
+            phones.add(mach);
+            System.out.println(mach);
+        }
 
-        pattern = Pattern.compile("9[0-9]{9}");
-        pattern2 = Pattern.compile("[^00]9[0-9]{2}\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
+        if (phones.size() < 1) {
+            if (externalUrl.contains("wa.me")) {
+                String number = externalUrl.split("http[s]?://wa.me/")[1];
+                phones.add(number);
+            }
+        }
+        if (phones.size() < 1) {
+
+            while (matcher4.find()) {
+                String mach = matcher4.group(0);
+                if (mach.length() > 6)
+                    phones.add(mach);
+                System.out.println(mach);
+            }
+            while (matcher5.find()) {
+                String mach = matcher5.group(0);
+                if (mach.length() > 6)
+                    phones.add(mach);
+                System.out.println(mach);
+            }
+        }
+
+
+        pattern = Pattern.compile("[^0][0]?9[0-9]{9}");
+        pattern3 = Pattern.compile("9[0-9]{2}-[0-9]{3}-[0-9]{4}");
+        pattern2 = Pattern.compile("09[0-9]{2}\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
         matcher = pattern.matcher(bio);
         matcher2 = pattern2.matcher(bio);
+        matcher2 = pattern3.matcher(bio);
 
         while (matcher.find()) {
             String number = matcher.group(0);
+            phones.add(number);
             System.out.println(number);
         }
         while (matcher2.find()) {
             String mach = matcher2.group(0);
+
+            phones.add(mach);
             System.out.println(mach);
+        }
+
+
+        if (phones.size() < 1) {
+            if (bio.contains("\uD835\uDFD8\uD835\uDFE1\uD835\uDFDB\uD835\uDFE0\uD835\uDFE1\uD835\uDFDD\uD835\uDFD8\uD835\uDFE1\uD835\uDFDC\uD835\uDFE0\uD835\uDFDE"))
+                phones.add("09389509486");
+            if (bio.contains("۲۸۳۰۲۲۸-٠٩٣٣"))
+                phones.add("۲۸۳۰۲۲۸-٠٩٣٣");
         }
 
 
@@ -509,11 +565,35 @@ public class USernameProccess {
 
         while (matcher.find()) {
             String number = matcher.group(0);
+            phones.add(number);
+            System.out.println(number);
+        }
+        //iran tehran code
+        pattern = Pattern.compile("021\\s[0-9]{2}\\s[0-9]{2}\\s[0-9]{4}");
+        matcher = pattern.matcher(bio);
+
+        while (matcher.find()) {
+            String number = matcher.group(0);
+            phones.add(number);
             System.out.println(number);
         }
 
-        return null;
+        if (phones.size() < 1)
+            System.out.println(bio);
+        return phones;
 
 
+    }
+
+
+    private String telID(String bio, String externalUrl) {
+        String telid = "";
+        if (externalUrl.contains("t.me")) {
+            String[] split = externalUrl.split("t.me/");
+            telid = "https://t.me/" + split[split.length - 1];
+
+        }
+
+        return telid;
     }
 }

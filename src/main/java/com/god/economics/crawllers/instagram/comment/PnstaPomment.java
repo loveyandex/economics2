@@ -31,12 +31,15 @@ public class PnstaPomment {
 
         HttpPost httpPost = new HttpPost(uri);
 
-        String text1 = "javanan bani hashem biaid mara pishe rokhe eshgham bezarid" ;
+        String text1 = "javanan bani hashem biaid mara pishe rokhe eshgham bezarid";
 
         text1 = "مشاوره برای سرمایه گذاری در بورس و بازار های مالی ";
+        text1 = "are man bidaram";
 
         String encode = URLEncoder.encode(text1);
-        String json = "comment_text=" + encode + "&replied_to_comment_id=";
+        Long idcomnt = 18126994897055292L;
+         idcomnt = 18097081609127139L;
+        String json = "comment_text=" + encode + "&replied_to_comment_id=" + idcomnt;
         StringEntity entity = new StringEntity(json);
         httpPost.setEntity(entity);
 //        httpPost.setHeader("Accept", "application/json");

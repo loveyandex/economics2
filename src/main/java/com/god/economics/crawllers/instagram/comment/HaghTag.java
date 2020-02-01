@@ -35,7 +35,7 @@ public class HaghTag {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void mainX(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
@@ -159,7 +159,7 @@ public class HaghTag {
 
     }
 
-    public static void main2(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
@@ -171,38 +171,15 @@ public class HaghTag {
         tag = "مانتو";
         tagid = "1";
 
-        try {
-            firstmezon = first(tag);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonObject = new JSONObject(firstmezon);
 
-        JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) (jsonObject).get("entry_data")).get("TagPage")).getJSONObject(0)
-                .get("graphql")).get("hashtag")).get("edge_hashtag_to_media"))
-                .get("edges");
-
-        proccessEdges(postedges, possibleUserIds);
-
-
-        JSONArray toppostedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) jsonObject.get("entry_data")).get("TagPage")).getJSONObject(0)
-                .get("graphql")).get("hashtag")).get("edge_hashtag_to_top_posts"))
-                .get("edges");
-
-        proccessEdges(toppostedges, possibleUserIds);
-
-        JSONObject page_info = (JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) jsonObject.get("entry_data")).get("TagPage")).getJSONObject(0)
-                .get("graphql")).get("hashtag")).get("edge_hashtag_to_media"))
-                .get("page_info");
-
-        boolean has_next_page = (boolean) page_info.get("has_next_page");
-        String end_cursor = (String) page_info.get("end_cursor");
+        String end_cursor = "QVFDR0h3UG5DTkRxbDc1WFVxLTQxeGxXS1hiUVBPOHNPQ0Q1QUkwUHlnOGF5RzRrcmtOZjNyNVN3NzlBUkczUkJPVUpZaHA5Tk5rOEZJclV2Uk1pcDJxaQ==";
         /*
          * {"tag_name":"mezon","first":1,"after":"QVFEc0FiZkNncGJVU0dGQ2czOENzWGlfbFBzZEpyUVZJc1BXN1kxeGpjMm15SFlIUXV4bHNzOWJ6cGt1N204QVNlaVVUQWV2QlYteU1rNzFqUlphS3Y3LQ=="}
          *  {"tag_name":"mezon","first":10,"after":"QVFBVUlvS1MwOTVaaXYwR01JVURGLU0yYWlYbjFLSUExVnlFYm5rT0lSSDZkNUxHczJMbU5xQWJwMkFkOHU5dWdObDVILVNKQ3dtSWE1YThXRkpsZnMtdQ=="}
          * */
         System.out.println(end_cursor);
 
+        boolean has_next_page = true;
         while (has_next_page) {
             String mezon = null;
             try {
@@ -217,14 +194,14 @@ public class HaghTag {
             }
 //            System.out.println(mezon);
 
-            jsonObject = new JSONObject(mezon);
+            JSONObject jsonObject = new JSONObject(mezon);
 
-            postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
+            JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
                     .get("data"))
                     .get("hashtag")).get("edge_hashtag_to_media"))
                     .get("edges");
 
-            page_info = (JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
+            JSONObject page_info = (JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
                     .get("data"))
                     .get("hashtag")).get("edge_hashtag_to_media"))
                     .get("page_info");

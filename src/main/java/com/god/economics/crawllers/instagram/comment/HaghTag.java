@@ -179,7 +179,8 @@ public class HaghTag {
 
         readIdsIfExistForThisID(possibleUserIds, tagid);
 
-        String end_cursor = "QVFCNEY3dnlpTGp3R2RfRmkzV1d5UHppLUxIbjBIVmwxa21kOFFFeHRmMmxPclBPc2RVWTVnUDVEV3NnR3BQcWpoMy1Za3M5R0ZfVVpCZWU0OUs0TGNyaQ==";
+        String end_cursor = "\n" +
+                "QVFDU0lyU1BjMGFDUjd4UVk1WG9FbHo3TVd5b2FGM0xma2gwQmRldi1jX2MyazRnX0x1Vm5wblJGQlY2TWFaTE9uNjFmUENuQlNWMklmdENNTVloQ1pORA==";
         /*
          * {"tag_name":"mezon","first":1,"after":"QVFEc0FiZkNncGJVU0dGQ2czOENzWGlfbFBzZEpyUVZJc1BXN1kxeGpjMm15SFlIUXV4bHNzOWJ6cGt1N204QVNlaVVUQWV2QlYteU1rNzFqUlphS3Y3LQ=="}
          *  {"tag_name":"mezon","first":10,"after":"QVFBVUlvS1MwOTVaaXYwR01JVURGLU0yYWlYbjFLSUExVnlFYm5rT0lSSDZkNUxHczJMbU5xQWJwMkFkOHU5dWdObDVILVNKQ3dtSWE1YThXRkpsZnMtdQ=="}

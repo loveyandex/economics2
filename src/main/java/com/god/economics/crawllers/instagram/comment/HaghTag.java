@@ -5,16 +5,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * created By gOD on 1/25/2020 9:11 PM
  */
-
+@RestController
 public class HaghTag {
 
     public static void maidn(String[] args) throws IOException {
@@ -35,6 +40,7 @@ public class HaghTag {
 
     }
 
+    @GetMapping("/starthashtag")
     public static void mainX(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
@@ -171,8 +177,9 @@ public class HaghTag {
         tag = "مانتو";
         tagid = "1";
 
+        readIdsIfExistForThisID(possibleUserIds, tagid);
 
-        String end_cursor = "QVFDR0h3UG5DTkRxbDc1WFVxLTQxeGxXS1hiUVBPOHNPQ0Q1QUkwUHlnOGF5RzRrcmtOZjNyNVN3NzlBUkczUkJPVUpZaHA5Tk5rOEZJclV2Uk1pcDJxaQ==";
+        String end_cursor = "QVFCNEY3dnlpTGp3R2RfRmkzV1d5UHppLUxIbjBIVmwxa21kOFFFeHRmMmxPclBPc2RVWTVnUDVEV3NnR3BQcWpoMy1Za3M5R0ZfVVpCZWU0OUs0TGNyaQ==";
         /*
          * {"tag_name":"mezon","first":1,"after":"QVFEc0FiZkNncGJVU0dGQ2czOENzWGlfbFBzZEpyUVZJc1BXN1kxeGpjMm15SFlIUXV4bHNzOWJ6cGt1N204QVNlaVVUQWV2QlYteU1rNzFqUlphS3Y3LQ=="}
          *  {"tag_name":"mezon","first":10,"after":"QVFBVUlvS1MwOTVaaXYwR01JVURGLU0yYWlYbjFLSUExVnlFYm5rT0lSSDZkNUxHczJMbU5xQWJwMkFkOHU5dWdObDVILVNKQ3dtSWE1YThXRkpsZnMtdQ=="}
@@ -258,6 +265,19 @@ public class HaghTag {
         System.out.println(resp);
 
 
+    }
+
+    private static void readIdsIfExistForThisID(HashSet<String> possibleUserIds, String tagid) {
+
+        try {
+            Scanner scanner = new Scanner(new File("ids" + tagid + ".txt"));
+            while (scanner.hasNext()) {
+                String id = scanner.nextLine();
+                possibleUserIds.add(id);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

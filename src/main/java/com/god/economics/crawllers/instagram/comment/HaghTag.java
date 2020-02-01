@@ -35,14 +35,20 @@ public class HaghTag {
 
     }
 
-    public static void maink(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
 
         String firstmezon = null;
+        String tag = "mezon";
+        String tagid = "0";
+
+        tag = "مانتو";
+        tagid = "1";
+
         try {
-            firstmezon = first("mezon");
+            firstmezon = first(tag);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,6 +65,8 @@ public class HaghTag {
                 .get("graphql")).get("hashtag")).get("edge_hashtag_to_top_posts"))
                 .get("edges");
 
+        proccessEdges(toppostedges, possibleUserIds);
+
         JSONObject page_info = (JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) jsonObject.get("entry_data")).get("TagPage")).getJSONObject(0)
                 .get("graphql")).get("hashtag")).get("edge_hashtag_to_media"))
                 .get("page_info");
@@ -74,10 +82,10 @@ public class HaghTag {
         while (has_next_page) {
             String mezon = null;
             try {
-                mezon = next("mezon", end_cursor);
+                mezon = next(tag, end_cursor);
             } catch (IOException e) {
                 try {
-                    mezon = next("mezon", end_cursor);
+                    mezon = next(tag, end_cursor);
                 } catch (IOException ex) {
                     System.err.println(ex);
 
@@ -102,12 +110,13 @@ public class HaghTag {
             proccessEdges(postedges, possibleUserIds);
             System.out.println(end_cursor);
 
-            FileWriter writer = new FileWriter("ids.txt", false);
+            FileWriter writer = new FileWriter("ids" + tagid + ".txt", false);
             for (int i = 0; i < possibleUserIds.size(); i++) {
                 writer.write(possibleUserIds.toArray()[i] + "\n");
             }
-            System.out.println(possibleUserIds.size());
+            writer.flush();
             writer.close();
+            System.out.println(possibleUserIds.size());
 
         }
 

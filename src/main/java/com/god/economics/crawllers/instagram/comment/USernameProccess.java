@@ -2,15 +2,23 @@ package com.god.economics.crawllers.instagram.comment;
 
 import com.god.economics.PinstaUserRepo;
 import com.god.economics.crawllers.Reqs;
+import com.god.economics.crawllers.instagram.comment.models.DataForExcel;
 import com.god.economics.crawllers.instagram.comment.models.PinstaUser;
 import com.google.gson.Gson;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -79,26 +87,88 @@ public class USernameProccess {
     @GetMapping("/ana")
     public void madin() throws IOException {
         List<PinstaUser> pinstaUserAll = pinstaUserRepo.findAll();
+        ArrayList<DataForExcel> dataForExcels = new ArrayList<>();
 
         for (PinstaUser pinstaUser : pinstaUserAll) {
             String bio = pinstaUser.getBio();
             String externalUrl = pinstaUser.getExternalUrl();
-            System.out.println(bio);
+//            System.out.println(bio);
 //            System.out.println(pinstaUser.getUsername());
-//            String checkPhoneNumberWhatsappTel = type(pinstaUser.getFullName(), bio);
-            phoneNumbers(bio, externalUrl);
-            telID(bio, externalUrl);
-            System.out.println("------------------------------------------------------------------------");
+            String type = type(pinstaUser.getFullName(), bio);
+            ArrayList<String> phoneNumbers = phoneNumbers(bio, externalUrl);
+            String telID = telID(bio, externalUrl);
+//            System.out.println("phons: " + new Gson().toJson(phoneNumbers));
+//            System.out.println("telid" + telID);
+            String einak = "عینک";
+
+            if (!type.equals("") && !type.equals(einak)) {
+                DataForExcel dataForExcel = new DataForExcel(pinstaUser.getFullName(), pinstaUser.getUsername(), type, telID, phoneNumbers);
+                dataForExcels.add(dataForExcel);
+            }
+//            System.out.println("------------------------------------------------------------------------");
 
 
         }
+        addtoSheet(dataForExcels);
+
+
+    }
+
+    private void addtoSheet(ArrayList<DataForExcel> dataForExcels) throws IOException {
+
+        FileInputStream myxls = null;
+        // Create a Workbook
+        Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
+        CreationHelper createHelper = workbook.getCreationHelper();
+
+        Sheet sheet = workbook.createSheet("data");
+
+
+        // Create Other rows and cells with employees data
+        int rowNum = 1;
+        for (DataForExcel dataForExcel : dataForExcels) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0)
+                    .setCellValue(dataForExcel.getFullname());
+            row.createCell(1)
+                    .setCellValue(dataForExcel.getType());
+
+            Row row1 = sheet.createRow(rowNum++);
+            row1.createCell(0)
+                    .setCellValue(dataForExcel.getUsername());
+
+            Row row2 = sheet.createRow(rowNum++);
+            row2.createCell(0)
+                    .setCellValue(dataForExcel.getTelID());
+
+            String phns = "";
+            for (String phone : dataForExcel.getPhones()) {
+                phns += phone + ",";
+            }
+            Row row3 = sheet.createRow(rowNum++);
+            row3.createCell(0)
+                    .setCellValue(phns);
+
+        }
+
+        // Write the output to a file
+        FileOutputStream fileOut = new FileOutputStream("poi2.xlsx");
+        workbook.write(fileOut);
+        fileOut.close();
+
+        // Closing the workbook
+        workbook.close();
+
+    }
+
+    private void addtoSheet(String fullName, String username, String type, ArrayList<String> phoneNumbers, String telID) {
 
 
     }
 
     private String type(String fullname, String bio) {
-        String leabasMaj = "لباس مجلسي،لباس مجلسى،لباس مجلسی،لباس";
-        String manto = "مانتو،manto،Manto";
+        String leabasMaj = "لباس مجلسي،لباس مجلسى،لباس مجلسی";
+        String manto = "manto،Manto";
 
         String kif = "کیف زنانه،كيف و كفش ،کیف و کفش ،کيف و کفش ،کیف ،کيف ";
         String kiflebas = "لباس و كيف و كفش";
@@ -121,6 +191,7 @@ public class USernameProccess {
         String designllebas = "طراح لباس";
         String designlleba2s = "طراحی_دوخت_لباس_عروس";
         String designAndDookht = "طراحی و دوخت";
+        String designAndDookhtmanto = "طراحی و دوخت مانتو";
         String lebas = "لباس";
         String mezon = "مزون";
         String mexon = "mezon";
@@ -181,6 +252,7 @@ public class USernameProccess {
         String pooshaak = "پوشاک";
         String style = "استایل";
         String pooshaak12 = "تولیدی";
+        String manto2 = "مانتو";
 
         //country and selign base none have a reasonal name
         String istanbul = "استانبول";
@@ -235,7 +307,8 @@ public class USernameProccess {
             solution += kif2 + " ,";
         }
         if (solution.equals("")) {
-            if (bio.contains(designAndDookht)) solution += designAndDookht + "";
+            if (bio.contains(designAndDookht))
+                solution += designAndDookht + "";
             else if (bio.contains(designAndDookht2)) solution += designAndDookht + "";
             else if (bio.contains(designAndDookht3)) solution += designAndDookht + "";
             else if (bio.contains(designlleba2s)) solution += designlleba2s + "";
@@ -303,9 +376,8 @@ public class USernameProccess {
             else if (bio.contains(pooshaak)) solution += pooshaak + "";
             else if (bio.contains(style)) solution += style + "";
             else if (bio.contains(pooshaak12)) solution += pooshaak12 + "";
-
-
             else if (bio.contains(lebas)) solution += lebas + "";
+            else if (bio.contains(manto2)) solution += manto2 + "";
             else if (bio.contains(tanpoosh)) solution += tanpoosh + "";
             else if (bio.contains(pooshakzanane)) solution += pooshakzanane + "";
             else if (bio.contains(lebastork)) solution += lebastork + "";
@@ -481,11 +553,17 @@ public class USernameProccess {
         Pattern pattern = Pattern.compile("۹[۰-۹]+");
         Pattern pattern4 = Pattern.compile("۹[۰-۹]{9}");
         Pattern pattern5 = Pattern.compile("[٠-٩]+");
+        Pattern pattern6 = Pattern.compile("۹[۰-۹]{2}-[۰-۹]{7}");
+        Pattern pattern7 = Pattern.compile("[٠-٩]+-[٠-٩]+");
+
         Pattern pattern2 = Pattern.compile("۹[۰-۹]{2}\\s+[۰-۹]{3}\\s+[۰-۹]{2}\\s+[۰-۹]{2}");
+
         Matcher matcher = pattern.matcher(bio);
         Matcher matcher2 = pattern2.matcher(bio);
         Matcher matcher4 = pattern4.matcher(bio);
         Matcher matcher5 = pattern5.matcher(bio);
+        Matcher matcher6 = pattern6.matcher(bio);
+        Matcher matcher7 = pattern7.matcher(bio);
 
         //("uD83D\uDC48۲۸۳۰۲۲۸-٠٩٣٣");۰۹۳۶۵۳۰۷۵۸۱
         Pattern pattern3 = Pattern.compile("[۰-۹]{7}-٠٩[۰-۹]{2}");
@@ -508,6 +586,18 @@ public class USernameProccess {
             System.out.println(mach);
         }
 
+
+        while (matcher6.find()) {
+            String mach = matcher6.group(0);
+            phones.add(mach);
+            System.out.println(mach);
+        }
+        while (matcher7.find()) {
+            String mach = matcher7.group(0);
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
         if (phones.size() < 1) {
             if (externalUrl.contains("wa.me")) {
                 String number = externalUrl.split("http[s]?://wa.me/")[1];
@@ -522,29 +612,88 @@ public class USernameProccess {
                     phones.add(mach);
                 System.out.println(mach);
             }
-            while (matcher5.find()) {
-                String mach = matcher5.group(0);
-                if (mach.length() > 6)
-                    phones.add(mach);
-                System.out.println(mach);
-            }
+
+        }
+        while (matcher5.find()) {
+            String mach = matcher5.group(0);
+            if (mach.length() > 6)
+                phones.add(mach);
+            System.out.println(mach);
         }
 
-
         pattern = Pattern.compile("[^0][0]?9[0-9]{9}");
+        pattern2 = Pattern.compile("9[0-9]{2}\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
         pattern3 = Pattern.compile("9[0-9]{2}-[0-9]{3}-[0-9]{4}");
-        pattern2 = Pattern.compile("09[0-9]{2}\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
+        pattern4 = Pattern.compile("9[0-9]{2}\\s[0-9]{7}");
+        pattern5 = Pattern.compile("021[0-9]{8}");
+        pattern6 = Pattern.compile("9[0-9]{2}-[0-9]{7}");
+        pattern7 = Pattern.compile("9[0-9]{2}_[0-9]{7}");
+        Pattern pattern8 = Pattern.compile("9[0-9]{2}_[0-9]{3}_[0-9]{4}");
+        Pattern pattern9 = Pattern.compile("[0-9]{7}_0*9[0-9]{2}");
+
         matcher = pattern.matcher(bio);
         matcher2 = pattern2.matcher(bio);
-        matcher2 = pattern3.matcher(bio);
+        matcher3 = pattern3.matcher(bio);
+        matcher4 = pattern4.matcher(bio);
+        matcher5 = pattern5.matcher(bio);
+        matcher6 = pattern6.matcher(bio);
+        matcher7 = pattern7.matcher(bio);
+        Matcher matcher8 = pattern8.matcher(bio);
+        Matcher matcher9 = pattern9.matcher(bio);
 
         while (matcher.find()) {
             String number = matcher.group(0);
             phones.add(number);
             System.out.println(number);
         }
+        while (matcher3.find()) {
+            String mach = matcher3.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
         while (matcher2.find()) {
             String mach = matcher2.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
+
+        while (matcher4.find()) {
+            String mach = matcher4.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
+
+        while (matcher5.find()) {
+            String mach = matcher5.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
+
+        while (matcher6.find()) {
+            String mach = matcher6.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
+
+        while (matcher7.find()) {
+            String mach = matcher7.group(0);
+
+            phones.add(mach);
+            System.out.println(mach);
+        }
+
+        while (matcher8.find()) {
+            String mach = matcher8.group(0);
 
             phones.add(mach);
             System.out.println(mach);
@@ -563,8 +712,18 @@ public class USernameProccess {
         pattern = Pattern.compile("0090[0-9]{10}");
         matcher = pattern.matcher(bio);
 
+        pattern2 = Pattern.compile("0090\\s+([0-9]+)\\s+[0-9]{3}\\s+[0-9]{2}\\s+[0-9]{2}");
+        matcher2 = pattern2.matcher(bio);
+
         while (matcher.find()) {
             String number = matcher.group(0);
+            phones.add(number);
+            System.out.println(number);
+        }
+
+
+        while (matcher2.find()) {
+            String number = matcher2.group(0);
             phones.add(number);
             System.out.println(number);
         }
@@ -572,14 +731,55 @@ public class USernameProccess {
         pattern = Pattern.compile("021\\s[0-9]{2}\\s[0-9]{2}\\s[0-9]{4}");
         matcher = pattern.matcher(bio);
 
+        pattern2 = Pattern.compile("021_[0-9]*\\s*[0-9]*\\s*[0-9]*");
+        matcher2 = pattern2.matcher(bio);
+
+
         while (matcher.find()) {
             String number = matcher.group(0);
             phones.add(number);
             System.out.println(number);
         }
 
-        if (phones.size() < 1)
+        while (matcher2.find()) {
+            String number = matcher2.group(0);
+            phones.add(number);
+            System.out.println(number);
+        }
+
+        if (phones.size() < 1) {
+
+            while (matcher9.find()) {
+                String mach = matcher9.group(0);
+
+                phones.add(mach);
+                System.out.println(mach);
+            }
+        }
+        if (phones.size() < 1) {
+
+
+            pattern2 = Pattern.compile("0[0-9]{2}_[0-9]*\\s*[0-9]*\\s*[0-9]*");
+            matcher2 = pattern2.matcher(bio);
+            while (matcher2.find()) {
+                String number = matcher2.group(0);
+                phones.add(number);
+                System.out.println(number);
+            }
+
+//            pattern = Pattern.compile("[0-9]+[-_\\s]*[0-9]+-*_*\\s*[0-9]*");
+//            matcher = pattern.matcher(bio);
+//
+//            while (matcher.find()) {
+//                String number = matcher.group(0);
+//                phones.add(number);
+//                System.out.println(number);
+//            }
+
+
             System.out.println(bio);
+
+        }
         return phones;
 
 

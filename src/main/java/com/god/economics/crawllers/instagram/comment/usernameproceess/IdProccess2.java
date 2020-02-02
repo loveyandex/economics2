@@ -38,7 +38,7 @@ public class IdProccess2 {
 
         String tagid = "0";
         FileWriter writer = new FileWriter("usernames" + tagid + ".txt", true);
-        Scanner scanner = new Scanner(new File("ids" + tagid + ".txt"));
+        Scanner scanner = new Scanner(new File("idtemp.txt"));
 
         while (scanner.hasNextLine()) {
             String id = scanner.nextLine();
@@ -50,6 +50,7 @@ public class IdProccess2 {
 
                 String resp = null;
                 try {
+                    System.out.println("id: "+id);
                     resp = Reqs.getReq("https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables=%7B%22user_id%22%3A%22" + id + "%22%2C%22include_chaining%22%3Atrue%2C%22include_reel%22%3Atrue%2C%22include_suggested_users%22%3Afalse%2C%22include_logged_out_extras%22%3Afalse%2C%22include_highlight_reels%22%3Atrue%2C%22include_related_profiles%22%3Afalse%7D");
                     JSONObject jsonObject = new JSONObject(resp);
                     String username = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("user")).get("reel"))
@@ -58,7 +59,7 @@ public class IdProccess2 {
                         System.out.println(username);
                     writer.write(username + "\r\n");
                     writer.flush();
-                    Thread.sleep(700);
+                    Thread.sleep(800);
                 } catch (Exception e) {
                     System.out.println(resp);
                     e.printStackTrace();

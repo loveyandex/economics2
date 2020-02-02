@@ -222,6 +222,8 @@ public class USernameProccess {
         String Lifestyle = "Lifestyle";
         String Beauty = "Beauty";
         String shawlandscarf = "shawl and scarf";
+        String shawlandscarfpersian = "شال و روسری";
+        String shawlandscarfpersian2 = "شال و روسری";
 
         String scarf = "scarf";
         String shawl = "scarf";

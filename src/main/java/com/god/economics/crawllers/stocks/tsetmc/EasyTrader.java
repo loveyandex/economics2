@@ -1,7 +1,5 @@
 package com.god.economics.crawllers.stocks.tsetmc;
 
-import netscape.javascript.JSObject;
-import okhttp3.*;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -12,7 +10,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 /**
  * created By gOD on 12/17/2019 2:46 PM

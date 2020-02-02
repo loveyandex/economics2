@@ -28,3 +28,8 @@ build/
 .vscode/
 btc_hours52.csv
 /.ideaDataSources
+
+
+*.xlsx
+*.xls
+

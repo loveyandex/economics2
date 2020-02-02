@@ -30,8 +30,8 @@ public class IdProccess3 {
 
 
         String tagid = "1";
-        FileWriter writer = new FileWriter("usernames" + tagid + ".txt", true);
-        Scanner scanner = new Scanner(new File("idtemp.txt"));
+        FileWriter writer = new FileWriter("usernames" + tagid + "_5000.txt", true);
+        Scanner scanner = new Scanner(new File("ids1_5000.txt"));
 
         while (scanner.hasNextLine()) {
             String id = scanner.nextLine();

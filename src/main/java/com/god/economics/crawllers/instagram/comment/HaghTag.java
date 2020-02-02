@@ -41,7 +41,7 @@ public class HaghTag {
     }
 
     @GetMapping("/starthashtag")
-    public static void main(String[] args) throws IOException {
+    public static void main2(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
@@ -170,14 +170,14 @@ public class HaghTag {
 
     }
 
-    public static void main2(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
 
         String firstmezon = null;
-        String tag = "mezon";
-        String tagid = "0";
+        String tag;
+        String tagid;
 
         tag = "مانتو";
         tagid = "1";
@@ -186,6 +186,8 @@ public class HaghTag {
 
         String end_cursor = "QVFDU0lyU1BjMGFDUjd4UVk1WG9FbHo3TVd5b2FGM0xma2gwQmRldi1jX2MyazRnX0x1Vm5wblJGQlY2TWFaTE9uNjFmUENuQlNWMklmdENNTVloQ1pORA==";
         end_cursor = "QVFEaDNlb083T1R4REZ5Z0lRd2ZUeHR3QXM2c0Q2SEZwSkFzS3gzSUFRX255YUlnUzktenR2YnlYX0EycGZMU1dkWVRvYnpsc2o2b3lUajJJd3BjSUVzUw==";
+        end_cursor = "QVFDZ0pPeWh3N3MwZlJxaU9xc1RXYnFrRl8tVlBPR090OEdqandBN041SjJzS1BTSnpiZ2gxb1kwcmo2XzN5aHh0MnNFUkF1ZUlrNUs0M0ZsSUc4SU9pSA==";
+
         /*
          * {"tag_name":"mezon","first":1,"after":"QVFEc0FiZkNncGJVU0dGQ2czOENzWGlfbFBzZEpyUVZJc1BXN1kxeGpjMm15SFlIUXV4bHNzOWJ6cGt1N204QVNlaVVUQWV2QlYteU1rNzFqUlphS3Y3LQ=="}
          *  {"tag_name":"mezon","first":10,"after":"QVFBVUlvS1MwOTVaaXYwR01JVURGLU0yYWlYbjFLSUExVnlFYm5rT0lSSDZkNUxHczJMbU5xQWJwMkFkOHU5dWdObDVILVNKQ3dtSWE1YThXRkpsZnMtdQ=="}

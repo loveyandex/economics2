@@ -20,7 +20,7 @@ import java.util.Scanner;
  * created By gOD on 1/25/2020 9:11 PM
  */
 @RestController
-public class HaghTag {
+public class HaghTag2 {
 
     public static void maidn(String[] args) throws IOException {
         String s = "https://www.instagram.com/explore/tags/mezon/";
@@ -40,8 +40,8 @@ public class HaghTag {
 
     }
 
-    @GetMapping("/starthashtag")
-    public static void main(String[] args) throws IOException {
+    @GetMapping("/starthashtag2")
+    public static void main2(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
@@ -170,7 +170,7 @@ public class HaghTag {
 
     }
 
-    public static void main2(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
@@ -178,14 +178,16 @@ public class HaghTag {
         String firstmezon = null;
         String tag = "mezon";
         String tagid = "0";
-
-        tag = "مانتو";
-        tagid = "1";
+//
+//        tag = "مانتو";
+//        tagid = "1";
 
         readIdsIfExistForThisID(possibleUserIds, tagid);
 
         String end_cursor = "QVFDU0lyU1BjMGFDUjd4UVk1WG9FbHo3TVd5b2FGM0xma2gwQmRldi1jX2MyazRnX0x1Vm5wblJGQlY2TWFaTE9uNjFmUENuQlNWMklmdENNTVloQ1pORA==";
         end_cursor = "QVFEaDNlb083T1R4REZ5Z0lRd2ZUeHR3QXM2c0Q2SEZwSkFzS3gzSUFRX255YUlnUzktenR2YnlYX0EycGZMU1dkWVRvYnpsc2o2b3lUajJJd3BjSUVzUw==";
+        end_cursor = "QVFDNHFqbkVYZW5WZUhlTEJqNGR2V3ZYeDFxQTNtdm1Hbm1YR1dmWTRYdmtaMWpZX2doRHZoU3czT1VZSWRrWWxlbHBxWHE1SnpPOE9MT0N6elJQSFN1eQ==";
+
         /*
          * {"tag_name":"mezon","first":1,"after":"QVFEc0FiZkNncGJVU0dGQ2czOENzWGlfbFBzZEpyUVZJc1BXN1kxeGpjMm15SFlIUXV4bHNzOWJ6cGt1N204QVNlaVVUQWV2QlYteU1rNzFqUlphS3Y3LQ=="}
          *  {"tag_name":"mezon","first":10,"after":"QVFBVUlvS1MwOTVaaXYwR01JVURGLU0yYWlYbjFLSUExVnlFYm5rT0lSSDZkNUxHczJMbU5xQWJwMkFkOHU5dWdObDVILVNKQ3dtSWE1YThXRkpsZnMtdQ=="}

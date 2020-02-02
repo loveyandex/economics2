@@ -36,7 +36,7 @@ public class IdProccess2 {
         useridScanner.close();
 
 
-        String tagid = "0";
+        String tagid = "1";
         FileWriter writer = new FileWriter("usernames" + tagid + ".txt", true);
         Scanner scanner = new Scanner(new File("idtemp.txt"));
 

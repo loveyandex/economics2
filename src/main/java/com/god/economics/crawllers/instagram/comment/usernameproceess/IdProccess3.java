@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class IdProccess3 {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         ArrayList<String> userids = new ArrayList<>();
         Scanner useridScanner = new Scanner(new File("ids0.txt"));
@@ -31,7 +31,7 @@ public class IdProccess3 {
 
         String tagid = "1";
         FileWriter writer = new FileWriter("usernames" + tagid + ".txt", true);
-        Scanner scanner = new Scanner(new File("ids1.txt"));
+        Scanner scanner = new Scanner(new File("idtemp.txt"));
 
         while (scanner.hasNextLine()) {
             String id = scanner.nextLine();
@@ -54,6 +54,8 @@ public class IdProccess3 {
                     Thread.sleep(800);
                 } catch (Exception e) {
                     System.out.println(resp);
+                    if (resp.contains("rate limited"))
+                        Thread.sleep(1000 * 60 * 5);
                     e.printStackTrace();
                 }
 

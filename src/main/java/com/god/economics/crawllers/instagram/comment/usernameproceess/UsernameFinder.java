@@ -25,6 +25,7 @@ public class UsernameFinder {
         JSONObject jsonObject = new JSONObject(resp);
         String username = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("user")).get("reel"))
                 .get("user")).get("username");
+        System.out.println(username);
 
 
     }

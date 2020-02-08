@@ -18,6 +18,7 @@ public class PinstaUser {
     private String bio;
     private String externalUrl;
     private String fullName;
+    private String probablyCity;
     private int edge_followed_by;
     private int edge_follow;
 

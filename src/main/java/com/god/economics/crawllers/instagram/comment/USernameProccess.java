@@ -3,6 +3,7 @@ package com.god.economics.crawllers.instagram.comment;
 import com.god.economics.PinstaUserRepo;
 import com.god.economics.crawllers.Reqs;
 import com.god.economics.crawllers.instagram.comment.models.DataForExcel;
+import com.god.economics.crawllers.instagram.comment.models.HashTags;
 import com.god.economics.crawllers.instagram.comment.models.PinstaUser;
 import com.google.gson.Gson;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -37,13 +38,16 @@ public class USernameProccess {
     @GetMapping("/bio2")
     public void main() throws IOException {
 
-        Scanner scanner = new Scanner(new File("usernames.txt"));
-        int ap = 0;
+        Scanner scanner = new Scanner(new File("usernames1_5000.txt"));
         while (scanner.hasNext()) {
-
             String resp = null;
             try {
                 String username = scanner.nextLine();
+                if (pinstaUserRepo.existsById(username)) {
+                    System.err.println("it exists " + username);
+                    continue;
+                }
+
                 String url = "https://www.instagram.com/" + username + "/?__a=1";
                 resp = Reqs.getReq(url);
 
@@ -63,6 +67,8 @@ public class USernameProccess {
 
                 String full_name = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("full_name");
+                String userId = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
+                        .get("id");
 
                 int edge_followed_by = ((int) ((JSONObject) ((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("edge_followed_by")).get("count"));
@@ -70,12 +76,14 @@ public class USernameProccess {
                 int edge_follow = ((int) ((JSONObject) ((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("edge_follow")).get("count"));
 
-                PinstaUser pinstaUser = new PinstaUser(username, username, bio, externalurl, full_name, edge_followed_by, edge_follow);
+                PinstaUser pinstaUser = new PinstaUser(username, username, bio, externalurl, full_name, "", HashTags.MANTO, edge_followed_by, edge_follow);
+                pinstaUser.setUserId(userId);
+
                 pinstaUserRepo.save(pinstaUser);
                 System.out.println(new Gson().toJson(pinstaUser));
                 Thread.sleep(1000);
             } catch (Exception e) {
-                System.out.println(resp);
+//                System.out.println(resp);
                 e.printStackTrace();
             }
 

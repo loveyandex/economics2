@@ -30,37 +30,36 @@ import java.util.regex.Pattern;
  */
 @RestController
 public class USernameProccess {
-//
+
     @Autowired
     private PinstaUserRepo pinstaUserRepo;
 
     @GetMapping("/bio2")
-    public void main() throws IOException, InterruptedException {
+    public void main() throws IOException {
         ArrayList<String> provinceAndtowns = new ArrayList<>();
         Scanner provinceAndtownsScanner = new Scanner(new File("provinceAndtowns.txt"));
         while (provinceAndtownsScanner.hasNextLine()) {
             provinceAndtowns.add(provinceAndtownsScanner.nextLine());
         }
 
-        Scanner scanner = new Scanner(new File("usernames1.txt"));
+        Scanner scanner = new Scanner(new File("usernames.txt"));
         int ap = 0;
         while (scanner.hasNext()) {
 
             String resp = null;
             try {
                 String username = scanner.nextLine();
-                if (pinstaUserRepo.existsById(username)) {
-                    System.out.println("existsbefore "+username);
-                    continue;
-                }
-
                 String url = "https://www.instagram.com/" + username + "/?__a=1";
                 resp = Reqs.getReq(url);
+
                 JSONObject jsonObject = new JSONObject(resp);
+
                 Object graphql = jsonObject.get("graphql");
+
 
                 Object bio0 = (((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("biography"));
+
 
                 String bio = bio0.toString();
 
@@ -84,67 +83,6 @@ public class USernameProccess {
                 System.out.println(new Gson().toJson(pinstaUser));
                 Thread.sleep(1000);
             } catch (Exception e) {
-                Thread.sleep(100);
-                System.out.println(resp);
-                e.printStackTrace();
-            }
-
-        }
-
-
-    }
-
-    @GetMapping("/bio")
-    public void x() throws IOException, InterruptedException {
-        ArrayList<String> provinceAndtowns = new ArrayList<>();
-        Scanner provinceAndtownsScanner = new Scanner(new File("provinceAndtowns.txt"));
-        while (provinceAndtownsScanner.hasNextLine()) {
-            provinceAndtowns.add(provinceAndtownsScanner.nextLine());
-        }
-
-        Scanner scanner = new Scanner(new File("usernames1.txt"));
-        int ap = 0;
-        while (scanner.hasNext()) {
-
-            String resp = null;
-            try {
-                String username = scanner.nextLine();
-                if (pinstaUserRepo.existsById(username)) {
-                    System.out.println("existsbefore "+username);
-                    continue;
-                }
-
-                String url = "https://www.instagram.com/" + username + "/?__a=1";
-                resp = Reqs.getReq(url);
-                JSONObject jsonObject = new JSONObject(resp);
-                Object graphql = jsonObject.get("graphql");
-
-                Object bio0 = (((JSONObject) (((JSONObject) graphql).get("user")))
-                        .get("biography"));
-
-                String bio = bio0.toString();
-
-                Object o = ((JSONObject) (((JSONObject) graphql).get("user"))).get("external_url");
-                String externalurl = o.toString();
-
-                String full_name = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
-                        .get("full_name");
-
-                int edge_followed_by = ((int) ((JSONObject) ((JSONObject) (((JSONObject) graphql).get("user")))
-                        .get("edge_followed_by")).get("count"));
-
-                int edge_follow = ((int) ((JSONObject) ((JSONObject) (((JSONObject) graphql).get("user")))
-                        .get("edge_follow")).get("count"));
-
-                String city = city(bio, provinceAndtowns);
-                System.out.println("city "+city);
-                PinstaUser pinstaUser = new PinstaUser(username, username, bio, externalurl, full_name, city, edge_followed_by, edge_follow);
-
-                pinstaUserRepo.save(pinstaUser);
-                System.out.println(new Gson().toJson(pinstaUser));
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                Thread.sleep(100);
                 System.out.println(resp);
                 e.printStackTrace();
             }

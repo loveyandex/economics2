@@ -19,6 +19,8 @@ public class InstaUser {
     private String bio;
     private String externalUrl;
     private String fullName;
+    private String probablyCity;
+    private String comeFromHashtag;
     private int edge_followed_by;
     private int edge_follow;
 

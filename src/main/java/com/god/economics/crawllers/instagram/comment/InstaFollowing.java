@@ -21,7 +21,9 @@ public class InstaFollowing {
     public static void main(String[] args) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
-        String   id = "8916622827";//donya last post
+        String   id = "8916622827";// last post
+           id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
+           id = "8664552700";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
         String uri = "https://www.instagram.com/web/friendships/8916622827/" + id + "/follow/";
 
         HttpPost httpPost = new HttpPost(uri);

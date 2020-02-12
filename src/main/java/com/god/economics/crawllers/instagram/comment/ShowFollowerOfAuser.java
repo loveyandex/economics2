@@ -20,7 +20,7 @@ public class ShowFollowerOfAuser {
 
 
     public static void main(String[] args) throws IOException {
-        String next = next(24, "8916622827");
+        String next = next(24, "305851563");
         JSONObject jsonObject = new JSONObject(next);
         System.out.println();
     }

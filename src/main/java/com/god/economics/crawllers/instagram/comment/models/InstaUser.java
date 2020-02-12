@@ -19,10 +19,18 @@ public class InstaUser {
     private String bio;
     private String externalUrl;
     private String fullName;
-    private String probablyCity;
-    private String comeFromHashtag;
     private int edge_followed_by;
     private int edge_follow;
+    private boolean isprivate;
+
+    private String status;
+
+    public InstaUser(String id, String username, String fullName,boolean isprivate) {
+        this.id = id;
+        this.username = username;
+        this.fullName = fullName;
+        this.isprivate = isprivate;
+    }
 
     public InstaUser(String id, String username, String bio, String externalUrl, String fullName, int edge_followed_by, int edge_follow) {
         this.id = id;
@@ -32,5 +40,8 @@ public class InstaUser {
         this.fullName = fullName;
         this.edge_followed_by = edge_followed_by;
         this.edge_follow = edge_follow;
+    }
+
+    public InstaUser() {
     }
 }

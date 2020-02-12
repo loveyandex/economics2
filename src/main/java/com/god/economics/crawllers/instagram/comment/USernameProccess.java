@@ -3,6 +3,7 @@ package com.god.economics.crawllers.instagram.comment;
 import com.god.economics.PinstaUserRepo;
 import com.god.economics.crawllers.Reqs;
 import com.god.economics.crawllers.instagram.comment.models.DataForExcel;
+import com.god.economics.crawllers.instagram.comment.models.HashTags;
 import com.god.economics.crawllers.instagram.comment.models.PinstaUser;
 import com.google.gson.Gson;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -42,13 +43,18 @@ public class USernameProccess {
             provinceAndtowns.add(provinceAndtownsScanner.nextLine());
         }
 
-        Scanner scanner = new Scanner(new File("usernames.txt"));
+        Scanner scanner = new Scanner(new File("usernames1_5000.txt"));
         int ap = 0;
         while (scanner.hasNext()) {
 
             String resp = null;
             try {
                 String username = scanner.nextLine();
+                if (pinstaUserRepo.existsById(username)) {
+                    System.err.println("it exists " + username);
+                    continue;
+                }
+
                 String url = "https://www.instagram.com/" + username + "/?__a=1";
                 resp = Reqs.getReq(url);
 
@@ -68,6 +74,8 @@ public class USernameProccess {
 
                 String full_name = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("full_name");
+                String userId = (String) ((JSONObject) (((JSONObject) graphql).get("user")))
+                        .get("id");
 
                 int edge_followed_by = ((int) ((JSONObject) ((JSONObject) (((JSONObject) graphql).get("user")))
                         .get("edge_followed_by")).get("count"));
@@ -76,8 +84,9 @@ public class USernameProccess {
                         .get("edge_follow")).get("count"));
 
                 String city = city(bio, provinceAndtowns);
-                System.out.println("city "+city);
-                PinstaUser pinstaUser = new PinstaUser(username, username, bio, externalurl, full_name, city, edge_followed_by, edge_follow);
+                System.out.println("city " + city);
+                PinstaUser pinstaUser = new PinstaUser(username, username, bio, externalurl, full_name, city, HashTags.MANTO,edge_followed_by, edge_follow);
+                pinstaUser.setUserId(userId);
 
                 pinstaUserRepo.save(pinstaUser);
                 System.out.println(new Gson().toJson(pinstaUser));
@@ -577,7 +586,7 @@ public class USernameProccess {
     }
 
 
-    private String city(String bio,ArrayList<String>  provinceAndtowns) {
+    private String city(String bio, ArrayList<String> provinceAndtowns) {
         bio = bio.replaceAll("ى", "ی");
         bio = bio.replaceAll("ي", "ی");
         bio = bio.replaceAll("ك", "ک");

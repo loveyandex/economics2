@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment.models;
+package com.god.economics.crawllers.instagram.models;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ExcelWriter {

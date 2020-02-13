@@ -1,6 +1,6 @@
-package com.god.economics.crawllers.instagram.comment.models.follow;
+package com.god.economics.crawllers.instagram.models.follow;
 
-import com.god.economics.crawllers.instagram.comment.models.InstaUser;
+import com.god.economics.crawllers.instagram.models.InstaUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

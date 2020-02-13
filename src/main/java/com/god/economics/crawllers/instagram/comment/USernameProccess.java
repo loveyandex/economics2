@@ -2,12 +2,10 @@ package com.god.economics.crawllers.instagram.comment;
 
 import com.god.economics.PinstaUserRepo;
 import com.god.economics.crawllers.Reqs;
-import com.god.economics.crawllers.instagram.comment.models.DataForExcel;
-import com.god.economics.crawllers.instagram.comment.models.HashTags;
-import com.god.economics.crawllers.instagram.comment.models.PinstaUser;
+import com.god.economics.crawllers.instagram.models.DataForExcel;
+import com.god.economics.crawllers.instagram.models.HashTags;
+import com.god.economics.crawllers.instagram.models.PinstaUser;
 import com.google.gson.Gson;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

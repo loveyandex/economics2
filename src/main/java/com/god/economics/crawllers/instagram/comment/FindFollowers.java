@@ -1,8 +1,8 @@
 package com.god.economics.crawllers.instagram.comment;
 
 import com.god.economics.FollowingFollowersRepository;
-import com.god.economics.crawllers.instagram.comment.models.InstaUser;
-import com.god.economics.crawllers.instagram.comment.models.follow.FollowingFollower;
+import com.god.economics.crawllers.instagram.models.InstaUser;
+import com.god.economics.crawllers.instagram.models.follow.FollowingFollower;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;

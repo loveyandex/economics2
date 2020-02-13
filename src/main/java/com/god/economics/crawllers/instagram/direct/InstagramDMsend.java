@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.direct;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -11,25 +11,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 
-/**
- * created By gOD on 12/17/2019 2:46 PM
- */
-
-public class InstaFollowing {
+public class InstagramDMsend {
 
 
     public static void main(String[] args) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
-        String   id = "8916622827";// last post
-           id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
-           id = "8664552700";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
-        String uri = "https://www.instagram.com/web/friendships/8916622827/" + id + "/follow/";
+        String id = "8916622827";// last post
+        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
+        id = "8664552700";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
+        String uri = "https://i.instagram.com/api/v1/direct_v2/threads/broadcast/text/";
 
         HttpPost httpPost = new HttpPost(uri);
 
+//        "csrftoken", "XXX"); // replace XXX with the values used when generating signature
+//        "device_id", "android-XXX"); // replace XXX with the values used when generating signature
+        int timestamp = (int) (System.currentTimeMillis() / 1000);
 
-        httpPost.setEntity(null);
+        String message = "salam kami hastesh";
+        String s = "_uuid=" + timestamp + "&recipient_users=" + "[[" + id + "]]" + "&client_context=" + timestamp + "&text=" + message;
+
+
+        ; // message to customize
+        StringEntity entity = new StringEntity(URLEncoder.encode(s));
+
+        httpPost.setEntity(entity);
 
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");

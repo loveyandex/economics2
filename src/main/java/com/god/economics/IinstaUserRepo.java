@@ -1,7 +1,6 @@
 package com.god.economics;
 
-import com.god.economics.crawllers.instagram.comment.models.InstaUser;
-import com.god.economics.crawllers.instagram.comment.models.PinstaUser;
+import com.god.economics.crawllers.instagram.models.InstaUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

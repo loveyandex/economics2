@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment.models;
+package com.god.economics.crawllers.instagram.models;
 
 import lombok.Getter;
 import lombok.Setter;

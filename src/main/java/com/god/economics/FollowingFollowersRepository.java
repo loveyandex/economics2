@@ -1,10 +1,8 @@
 package com.god.economics;
 
-import com.god.economics.crawllers.instagram.comment.models.InstaUser;
-import com.god.economics.crawllers.instagram.comment.models.follow.FollowingFollower;
+import com.god.economics.crawllers.instagram.models.follow.FollowingFollower;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

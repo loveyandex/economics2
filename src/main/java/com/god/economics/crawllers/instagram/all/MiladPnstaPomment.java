@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;

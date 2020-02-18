@@ -1,20 +1,11 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
-import io.netty.util.AsciiString;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashSet;
 
 /**
  * created By gOD on 12/17/2019 2:46 PM

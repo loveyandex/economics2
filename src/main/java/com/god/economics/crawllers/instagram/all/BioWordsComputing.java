@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
 /**
  * created By gOD on 1/26/2020 10:19 AM

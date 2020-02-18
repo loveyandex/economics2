@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
 import com.god.economics.crawllers.Reqs;
 import org.json.JSONArray;

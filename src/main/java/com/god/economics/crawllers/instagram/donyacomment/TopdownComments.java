@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.realcomment;
+package com.god.economics.crawllers.instagram.donyacomment;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

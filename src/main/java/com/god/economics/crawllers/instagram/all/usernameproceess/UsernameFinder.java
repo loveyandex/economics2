@@ -1,13 +1,9 @@
-package com.god.economics.crawllers.instagram.comment.usernameproceess;
+package com.god.economics.crawllers.instagram.all.usernameproceess;
 
 import com.god.economics.crawllers.Reqs;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Scanner;
 
 /**
  * created By gOD on 1/26/2020 8:59 AM

@@ -1,9 +1,8 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 

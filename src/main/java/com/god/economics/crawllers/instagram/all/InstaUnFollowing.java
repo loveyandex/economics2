@@ -1,47 +1,32 @@
-package com.god.economics.crawllers.instagram.comment;
+package com.god.economics.crawllers.instagram.all;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URLEncoder;
 
 /**
  * created By gOD on 12/17/2019 2:46 PM
  */
 
-public class PnstaPomment {
+public class InstaUnFollowing {
 
 
     public static void main(String[] args) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
-        String id = "2194939228587455523";
-        id = "2227859801112021496";//donya last post
-        id = "2197568975716933739";//mahsa_._khanoom_ last post https://www.instagram.com/p/B5_VVcXBuBr/
-        id = "2229439841077227618";//mahsa_._khanoom_ last post https://www.instagram.com/p/B7wj7kvgvBi/
-        id = "2229310149819146625";//donya last post
-        String uri = "https://www.instagram.com/web/comments/" + id + "/add/";
+        String   id = "8916622827";//donya last post
+        String uri = "https://www.instagram.com/web/friendships/" + id + "/unfollow/";
 
         HttpPost httpPost = new HttpPost(uri);
 
-        String text1 = "javanan bani hashem biaid mara pishe rokhe eshgham bezarid";
 
-        text1 = "مشاوره برای سرمایه گذاری در بورس و بازار های مالی ";
-        text1 = "are man bidaram";
+        httpPost.setEntity(null);
 
-        String encode = URLEncoder.encode(text1);
-        Long idcomnt = 18126994897055292L;
-         idcomnt = 18097081609127139L;
-        String json = "comment_text=" + encode + "&replied_to_comment_id=" + idcomnt;
-        StringEntity entity = new StringEntity(json);
-        httpPost.setEntity(entity);
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
         httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");

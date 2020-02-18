@@ -1,6 +1,7 @@
 package com.god.economics.crawllers.instagram.follow;
 
 import com.god.economics.FollowingFollowersRepository;
+import com.god.economics.InstaUserRepo;
 import com.god.economics.crawllers.instagram.models.InstaUser;
 import com.god.economics.crawllers.instagram.models.follow.FollowingFollower;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -31,6 +32,199 @@ public class FindFollowers {
     @Autowired
     private FollowingFollowersRepository followingFollowersRepository;
 
+    @Autowired
+    private InstaUserRepo instaUserRepo;
+
+
+    @GetMapping("/sexy/")
+    public String sendfollowdingsecxy() throws Exception {
+        while (true) {
+
+            String[] ids = {"1296464116","305851563","373148161"};
+
+            String id = ids[(int) (Math.random() * 1000000) % 3];
+            System.out.println(id);
+
+            CloseableHttpClient client = HttpClients.createDefault();
+//        String id = "8916622827";// last post
+//        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
+//        id = "305851563";// username: reza golzar
+            //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
+            int number = 18;
+            String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", id, number);
+            String ev = URLEncoder.encode(par);//first 1 i see
+
+            String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;
+            HttpGet httpPost = new HttpGet(url);
+
+
+//        httpPost.setHeader("Accept", "application/json");
+//        httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
+            httpPost.setHeader("x-csrftoken", "Pe8NDhzZPUscfWFwJixTXrvnnQ5leUZs");
+            httpPost.setHeader("x-ig-app-id", "936619743392459");
+            httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
+            httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
+            httpPost.setHeader("x-requested-with", "XMLHttpRequest");
+            httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
+            httpPost.setHeader("cookie", "ig_did=FC25AF83-F5A9-4DF9-AE6D-0E2FB36E6797; mid=Xeg7dwALAAFcMpfjwd-b37b1J96C; csrftoken=Pe8NDhzZPUscfWFwJixTXrvnnQ5leUZs; ds_user_id=30134076076; sessionid=30134076076%3AxI6ofaC45JjxIO%3A2; rur=ATN; urlgen=\"{\\\"77.104.120.73\\\": 42337\\054 \\\"212.80.12.73\\\": 44889}:1j4Ajo:rdu9ITZCw8vEaZgyre0SwTEq7lg\"");
+
+            CloseableHttpResponse response = client.execute(httpPost);
+
+            int statusCode = response.getStatusLine().getStatusCode();
+
+            if (statusCode == 200) {
+
+                StringBuilder sb = new StringBuilder();
+                try {
+                    BufferedReader reader =
+                            new BufferedReader(new InputStreamReader(response.getEntity().getContent()), 6522728);
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONObject jsonObject = new JSONObject(sb.toString());
+
+                JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
+                        .get("data"))
+                        .get("user")).get("edge_followed_by"))
+                        .get("edges");
+
+                for (int i = 0; i < postedges.length(); i++) {
+                    System.out.println(i);
+                    JSONObject node = (JSONObject) postedges.getJSONObject(i).get("node");
+                    String followingid = (String) node.get("id");
+                    if (instaUserRepo.existsById(followingid)) {
+                        System.out.println("exists before");
+                        continue;
+                    }
+                    boolean is_private = (boolean) node.get("is_private");
+                    String username = (String) node.get("username");
+                    String full_name = (String) node.get("full_name");
+                    InstaUser instaUser = new InstaUser(followingid, username, full_name, is_private);
+                    String request = sendFollowingRequest(followingid);
+                    if (request.equals("fucked")) {
+                        Thread.sleep((long) (400) * 1000 + 200);
+                    }
+                    instaUser.setStatus(request);
+                    instaUserRepo.save(instaUser);
+//                    Thread.sleep((long) (Math.random() * 2) + 1000 * 35);
+                }
+                long millis = (long) ((long) (Math.random() * (60 * 3.5 * 1000)) + 60 * 13.5* 1000);
+                System.out.println("we are in sleep for a" + millis/60 + " min");
+
+                Thread.sleep(millis);
+
+
+            }
+
+        }
+
+    }
+
+
+    @GetMapping("/justfirsts/")
+    public String sendfollowding() throws Exception {
+        while (true) {
+
+            String[] ids = {"1296464116","305851563"};
+
+            String id = ids[(int) (Math.random() * 1000000) % 2];
+            System.out.println(id);
+
+            CloseableHttpClient client = HttpClients.createDefault();
+//        String id = "8916622827";// last post
+//        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
+//        id = "305851563";// username: reza golzar
+            //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
+            int number = 18;
+            String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", id, number);
+            String ev = URLEncoder.encode(par);//first 1 i see
+
+            String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;
+            HttpGet httpPost = new HttpGet(url);
+
+
+//        httpPost.setHeader("Accept", "application/json");
+//        httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
+            httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
+            httpPost.setHeader("x-ig-app-id", "936619743392459");
+            httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
+            httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
+            httpPost.setHeader("x-requested-with", "XMLHttpRequest");
+            httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
+            httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; csrftoken=RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS; ds_user_id=29703930020; sessionid=29703930020%3AODlJy9nPhiKQ82%3A25; rur=VLL; urlgen=\"{\\\"198.16.70.51\\\": 174}:1j2eFa:yuQisY11jsRxc_PvpSYSHxZ9fzM\"");
+
+            CloseableHttpResponse response = client.execute(httpPost);
+
+            int statusCode = response.getStatusLine().getStatusCode();
+
+            if (statusCode == 200) {
+
+                StringBuilder sb = new StringBuilder();
+                try {
+                    BufferedReader reader =
+                            new BufferedReader(new InputStreamReader(response.getEntity().getContent()), 6522728);
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONObject jsonObject = new JSONObject(sb.toString());
+
+                JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject
+                        .get("data"))
+                        .get("user")).get("edge_followed_by"))
+                        .get("edges");
+
+                for (int i = 0; i < postedges.length(); i++) {
+                    System.out.println(i);
+                    JSONObject node = (JSONObject) postedges.getJSONObject(i).get("node");
+                    String followingid = (String) node.get("id");
+                    if (instaUserRepo.existsById(followingid)) {
+                        System.out.println("exists before");
+                        continue;
+                    }
+                    boolean is_private = (boolean) node.get("is_private");
+                    String username = (String) node.get("username");
+                    String full_name = (String) node.get("full_name");
+                    InstaUser instaUser = new InstaUser(followingid, username, full_name, is_private);
+                    String request = sendFollowingRequest(followingid);
+                    if (request.equals("fucked")) {
+                        Thread.sleep((long) (400) * 1000 + 200);
+                    }
+                    instaUser.setStatus(request);
+                    instaUserRepo.save(instaUser);
+//                    Thread.sleep((long) (Math.random() * 2) + 1000 * 35);
+                }
+                long millis = (long) ((long) (Math.random() * (60 * 3.5 * 1000)) + 60 * 13.5* 1000);
+                System.out.println("we are in sleep for a" + millis/60 + " min");
+
+                Thread.sleep(millis);
+
+
+            }
+
+        }
+
+    }
+
 
     @GetMapping("/sendfollowing/{id}")
     public String sendfollowing(@PathVariable String id) throws Exception {
@@ -39,20 +233,19 @@ public class FindFollowers {
         Optional<FollowingFollower> followingFollowerBy = followingFollowersRepository.findFollowingFollowerBy(id);
         FollowingFollower followingFollower = followingFollowerBy.get();
         List<InstaUser> followers = followingFollower.getFollowers();
-        for (int i = 229; i < followers.size(); i++) {
+        for (int i = 1640; i < followers.size(); i++) {
             InstaUser follower = followers.get(i);
             String followerId = follower.getId();
             String request = sendFollowingRequest(followerId);
-            if (request.equals("fucked"))
-                Thread.sleep((long) (300)*1000+200);
+            System.out.println(i);
+            if (request.equals("fucked")) {
+                Thread.sleep((long) (400) * 1000 + 200);
+            }
 
             follower.setStatus(request);
-            Thread.sleep((long) (Math.random() * 2000)+1000);
-            System.out.println(i);
+            Thread.sleep((long) (Math.random() * 20) + 1000 * 35);
         }
         followingFollowersRepository.save(followingFollower);
-
-
 
 
         return "ok";
@@ -62,7 +255,7 @@ public class FindFollowers {
 
         CloseableHttpClient client = HttpClients.createDefault();
 
-        String uri = "https://www.instagram.com/web/friendships/8916622827/" + followerId + "/follow/";
+        String uri = "https://www.instagram.com/web/friendships/" + followerId + "/follow/";
 
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(null);
@@ -70,38 +263,35 @@ public class FindFollowers {
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
         httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        httpPost.setHeader("x-csrftoken", "66NGmYYKboVZg37V3xdmGi437kjcxag6");
+        httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
         httpPost.setHeader("x-ig-app-id", "936619743392459");
         httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
         httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
         httpPost.setHeader("x-requested-with", "XMLHttpRequest");
         httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-        httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; rur=VLL; csrftoken=66NGmYYKboVZg37V3xdmGi437kjcxag6; ds_user_id=29703930020; sessionid=29703930020%3A1ZYcZbLJGhjvJt%3A18; urlgen=\"{\\\"212.80.12.73\\\": 44889}:1j2Msn:MnE8pCTjVKaN1Mi4tg02dNKxmXM\"");
+        httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; rur=VLL; csrftoken=RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS; ds_user_id=29703930020; sessionid=29703930020%3AODlJy9nPhiKQ82%3A25; urlgen=\"{\\\"194.225.108.73\\\": 59794\\054 \\\"77.104.120.73\\\": 42337\\054 \\\"212.80.12.73\\\": 44889}:1j2Voo:GXiVyxHJ2YS2TUSIFIaAR9XkxLQ\"");
 
         CloseableHttpResponse response = client.execute(httpPost);
 
         int statusCode = response.getStatusLine().getStatusCode();
         response.getEntity().getContentLength();  //it should not be 0
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(response.getEntity().getContent()), 65728);
+            String line = null;
 
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.err.println(sb.toString() + " code:" + statusCode);
         if (statusCode == 200) {
 
-            StringBuilder sb = new StringBuilder();
-            try {
-                BufferedReader reader =
-                        new BufferedReader(new InputStreamReader(response.getEntity().getContent()), 65728);
-                String line = null;
-
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-            System.err.println(sb.toString());
 //            JSONObject jsonObject = new JSONObject(sb.toString());
 //            String result = jsonObject.get("result").toString();
             return "ok";

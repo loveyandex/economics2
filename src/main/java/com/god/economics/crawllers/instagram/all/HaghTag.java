@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -40,15 +41,15 @@ public class HaghTag {
 
     }
 
-    @GetMapping("/starthashtag")
-    public static void main2(String[] args) throws IOException {
+    @GetMapping("/starthashtag/{tag}")
+    public static void main2(@PathVariable String tag) throws IOException {
 
         HashSet<String> possibleUserIds = new HashSet<>();
 
 
         String firstmezon = null;
 
-        String tag = "mezon";
+//         tag = "mezon";
         String tagid = "0";
 
 //        tag = "مانتو";

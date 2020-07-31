@@ -29,15 +29,33 @@ import java.util.Optional;
 
 @RestController
 public class MahyaProtein {
-
     @Autowired
     private GoodClassificationRepo goodClassificationRepo;
 
     @Autowired
+    private String publicInstance;
+
+    @Autowired
     private ItemRepository itemRepository;
+
     private String host = "https://www.digikala.com";
 
-    @GetMapping("/root")
+
+
+
+    @GetMapping("/pub")
+    public String test() {
+        return publicInstance;
+    }
+
+    @GetMapping("/pub2")
+    public String tes2t() {
+        publicInstance="king in the north"+Math.random();
+        return publicInstance;
+    }
+
+
+        @GetMapping("/root")
     public void ss() {
 
 

@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 @Getter@Setter@Accessors(chain = true)
-class Employee {
+public class Employee {
     private String name;
     private String email;
     private Date dateOfBirth;
@@ -17,6 +17,11 @@ class Employee {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+    }
+
+    public Employee(String name, double salary) {
+        this.name = name;
         this.salary = salary;
     }
 

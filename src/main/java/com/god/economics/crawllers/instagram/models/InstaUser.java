@@ -15,6 +15,7 @@ public class InstaUser {
 
     @Id
     private String id;
+    private String userid;
     private String username;
     private String bio;
     private String externalUrl;

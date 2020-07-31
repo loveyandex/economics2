@@ -1,5 +1,6 @@
 package com.god.economics.crawllers.instagram.donyacomment;
 
+import com.god.economics.crawllers.Reqs;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -7,6 +8,9 @@ import org.jsoup.nodes.Document;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * created By gOD on 1/25/2020 9:11 PM
@@ -14,8 +18,23 @@ import java.io.IOException;
 @RestController
 public class Coment {
 
+
     public static void main(String[] args) throws IOException {
+
+
         String s = "https://www.instagram.com/p/B8jcHtqJrmx/";
+        s = "https://www.instagram.com/p/B_hqd42jk4y/";
+        s = "https://www.instagram.com/p/CAp2UliHT_T/";
+        s = "https://www.instagram.com/p/CBNLTfdDUvz/";
+        s = "https://www.instagram.com/p/CBGCUB1DirX/";
+        s = "https://www.instagram.com/p/CBv_312pCou/";
+        s = "https://www.instagram.com/p/CCGqmF-jPEB/";
+        s = "https://www.instagram.com/p/CCRRlUBJ2Lq/";
+        s = "https://www.instagram.com/p/CCVnahgDjFA/";
+        s = "https://www.instagram.com/p/CCbAAchjlsS/";
+        s = "https://www.instagram.com/p/CCcNKIcnJds/";
+
+
 //
         Document document = Jsoup.connect(s).get();
 
@@ -32,14 +51,38 @@ public class Coment {
         String end_cursor = (String) page_info
                 .get("end_cursor");
         JSONArray edges = (JSONArray) mediacommnet.get("edges");
+        HashSet<String> usernames = new HashSet<>();
+        proccessEdges(edges,usernames);
+        while (has) {
+//            new Scanner(System.in).nextLine();
 
+            String v = String.format("{\"shortcode\":\"B_hqd42jk4y\",\"first\":200,\"after\":\"%s\"}",end_cursor);
+            String ev = URLEncoder.encode(v);//first 1 i see
+
+            String jing = "https://www.instagram.com/graphql/query/?query_hash=bc3296d1ce80a24b1b6e40b1e72903f5&variables="+ev;
+            String req = Reqs.getReq(jing);
+            jsonObject = new JSONObject(req);
+
+            mediacommnet= ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("shortcode_media"))
+                    .get("edge_media_to_parent_comment"));
+
+
+
+            page_info = (JSONObject) mediacommnet.get("page_info");
+            has = (boolean) page_info.get("has_next_page");
+
+            end_cursor = (String) page_info
+                    .get("end_cursor");
+            proccessEdges(edges,usernames);
+
+        }
 
         System.out.println(script);
 
 
     }
 
-//    @GetMapping("/starthashtag")
+    //    @GetMapping("/starthashtag")
 //    public static void maine(String[] args) throws IOException {
 //        String script = null;
 //
@@ -178,19 +221,26 @@ public class Coment {
 //        return script;
 //    }
 //
-//    static void proccessEdges(JSONArray edges, HashSet<String> possibleIds) {
-//
-//        for (int i = 0; i < edges.length(); i++) {
-//            JSONObject jsonObject = edges.getJSONObject(i);
-//            String id = (String) ((JSONObject) ((JSONObject) jsonObject
-//                    .get("node"))
-//                    .get("owner"))
-//                    .get("id");
-//
-//            possibleIds.add(id);
-//        }
-//
-//    }
-//
+    static public void proccessEdges(JSONArray edges,HashSet<String> usernames ) {
+
+        System.err.println(edges.length());
+        for (int i = 0; i < edges.length(); i++) {
+            JSONObject jsonObject = edges.getJSONObject(i);
+            String username = (String) ((JSONObject) ((JSONObject) jsonObject
+                    .get("node"))
+                    .get("owner"))
+                    .get("username");
+            String text = (String)  ((JSONObject) jsonObject
+                    .get("node"))
+                    .get("text");
+            Integer created_at = (Integer) ((JSONObject) jsonObject.get("node")).get("created_at");
+            java.util.Date time = new java.util.Date((long) created_at * 1000);
+
+            usernames.add(username);
+            System.out.println(username+"   "+text+" "+time);
+        }
+
+    }
+
 
 }

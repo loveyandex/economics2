@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class Reqs {
 
 
-    public static String getReq(String url) throws IOException {
+    public static String
+    getReq(String url) throws IOException {
         OkHttpClient client =  new OkHttpClient.Builder()
                 .connectTimeout(18, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)

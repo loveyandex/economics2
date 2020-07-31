@@ -16,11 +16,11 @@ import java.util.List;
 @SpringBootApplication
 public class EconomicsApplication {
 
-    @Autowired
+    @Autowired(required = false)
     private ProductRepo productRepo;
 
     public static void main(String[] args) {
-        SpringApplication.run(EconomicsApplication.class, args);
+                SpringApplication.run(EconomicsApplication.class, args);
     }
 
     @Bean
@@ -90,7 +90,7 @@ public class EconomicsApplication {
 
         });
 
-        if (Math.random() > 0.75) {
+        if (Math.random() > 0.5) {
             thread.start();
         }else
             System.err.println("random god didn't allow meat price be gathered");

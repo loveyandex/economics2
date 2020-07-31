@@ -2,6 +2,7 @@ package com.god.economics.crawllers.instagram.follow;
 
 import com.god.economics.FollowingFollowersRepository;
 import com.god.economics.InstaUserRepo;
+import com.god.economics.crawllers.instagram.LoginConfig;
 import com.god.economics.crawllers.instagram.models.InstaUser;
 import com.god.economics.crawllers.instagram.models.follow.FollowingFollower;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -161,7 +162,7 @@ public class FindFollowers {
             httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
             httpPost.setHeader("x-requested-with", "XMLHttpRequest");
             httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-            httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; csrftoken=RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS; ds_user_id=29703930020; sessionid=29703930020%3AODlJy9nPhiKQ82%3A25; rur=VLL; urlgen=\"{\\\"198.16.70.51\\\": 174}:1j2eFa:yuQisY11jsRxc_PvpSYSHxZ9fzM\"");
+            httpPost.setHeader("cookie", LoginConfig.cookie);
 
             CloseableHttpResponse response = client.execute(httpPost);
 

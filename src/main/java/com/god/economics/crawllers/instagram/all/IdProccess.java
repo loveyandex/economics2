@@ -16,6 +16,10 @@ public class IdProccess {
 
 
     public static void main(String[] args) throws IOException {
+        System.out.println(IDtoUsername("1231796649"));//nil
+        System.exit(0);
+
+
         FileWriter writer = new FileWriter("usernames.txt", true);
 
         Scanner scanner = new Scanner(new File("ids.txt"));
@@ -47,6 +51,22 @@ public class IdProccess {
         }
 
 
+    }
+
+
+    public static String IDtoUsername(String id) throws IOException {
+
+        String resp;
+
+        resp = Reqs.getReq("https://www.instagram.com/graphql/query/?query_hash=c9100bf9110dd6361671f113dd02e7d6&variables=%7B%22user_id%22%3A%22" + id + "%22%2C%22include_chaining%22%3Atrue%2C%22include_reel%22%3Atrue%2C%22include_suggested_users%22%3Afalse%2C%22include_logged_out_extras%22%3Afalse%2C%22include_highlight_reels%22%3Atrue%2C%22include_related_profiles%22%3Afalse%7D");
+        JSONObject jsonObject = new JSONObject(resp);
+        String username = (String) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) jsonObject.get("data")).get("user")).get("reel"))
+                .get("user")).get("username");
+
+        return username;
+
 
     }
+
+
 }

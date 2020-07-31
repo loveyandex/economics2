@@ -15,7 +15,7 @@ import java.net.URLEncoder;
  * created By gOD on 12/17/2019 2:46 PM
  */
 
-public class MiladPnstaPomment {
+public class InstaPomment {
 
 
     public static void main(String[] args) throws IOException {

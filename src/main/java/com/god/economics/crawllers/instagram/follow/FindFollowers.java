@@ -132,6 +132,14 @@ public class FindFollowers {
     }
 
 
+    public static void main(String[] args) {
+        try {
+            String request = new FindFollowers().sendFollowingRequest("1831310784");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @GetMapping("/justfirsts/")
     public String sendfollowding() throws Exception {
         while (true) {
@@ -146,20 +154,21 @@ public class FindFollowers {
 //        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
 //        id = "305851563";// username: reza golzar
             //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
-            int number = 18;
+            int number = 15;
             String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":true,\"first\":%d}", id, number);
             String ev = URLEncoder.encode(par);//first 1 i see
 
             String url = "https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables=" + ev;
+            System.out.println(url);
             HttpGet httpPost = new HttpGet(url);
 
 
 //        httpPost.setHeader("Accept", "application/json");
 //        httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-            httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
-            httpPost.setHeader("x-ig-app-id", "936619743392459");
-            httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
-            httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
+//            httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
+//            httpPost.setHeader("x-ig-app-id", "936619743392459");
+//            httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
+//            httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
             httpPost.setHeader("x-requested-with", "XMLHttpRequest");
             httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
             httpPost.setHeader("cookie", LoginConfig.cookie);
@@ -214,8 +223,8 @@ public class FindFollowers {
                     instaUserRepo.save(instaUser);
 //                    Thread.sleep((long) (Math.random() * 2) + 1000 * 35);
                 }
-                long millis = (long) ((long) (Math.random() * (60 * 3.5 * 1000)) + 60 * 13.5* 1000);
-                System.out.println("we are in sleep for a" + millis/60 + " min");
+                long millis = (long) ((long) (Math.random() * (60 * 1.5 * 1000)) + 60 * 15* 1000);
+                System.out.println("we are in sleep for a" + millis/60000 + " min");
 
                 Thread.sleep(millis);
 
@@ -252,6 +261,10 @@ public class FindFollowers {
         return "ok";
     }
 
+
+
+
+
     private String sendFollowingRequest(String followerId) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
@@ -264,13 +277,13 @@ public class FindFollowers {
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
         httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
+        httpPost.setHeader("x-csrftoken", "gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5");
         httpPost.setHeader("x-ig-app-id", "936619743392459");
         httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
         httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
         httpPost.setHeader("x-requested-with", "XMLHttpRequest");
         httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-        httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; rur=VLL; csrftoken=RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS; ds_user_id=29703930020; sessionid=29703930020%3AODlJy9nPhiKQ82%3A25; urlgen=\"{\\\"194.225.108.73\\\": 59794\\054 \\\"77.104.120.73\\\": 42337\\054 \\\"212.80.12.73\\\": 44889}:1j2Voo:GXiVyxHJ2YS2TUSIFIaAR9XkxLQ\"");
+        httpPost.setHeader("cookie", LoginConfig.cookie);
 
         CloseableHttpResponse response = client.execute(httpPost);
 
@@ -366,7 +379,7 @@ public class FindFollowers {
 
 
     @GetMapping("/follow/{id}")
-    public void main(@PathVariable String id) throws Exception {
+    public void gg(@PathVariable String id) throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
 //        String id = "8916622827";// last post
 //        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"

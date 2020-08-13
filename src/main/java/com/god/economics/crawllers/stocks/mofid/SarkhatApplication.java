@@ -18,7 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-//@SpringBootApplication
+@SpringBootApplication
 public class SarkhatApplication implements CommandLineRunner {
 
 
@@ -34,34 +34,35 @@ public class SarkhatApplication implements CommandLineRunner {
         isin="IRO3BDYZ0001";//دی
         isin="IRO1TAMN0001";//شستا
 
-        isin="IRO1TAMN0001";//شستا
-        isin="IRO1KSHJ0001";//hekeshti
+
         isin="IRO1BRKT0001";//برکت
 
-        ArrayList<String> isins = new ArrayList<>();
-        ArrayList<String> ords = new ArrayList<>();
-        ArrayList<String> prcs = new ArrayList<>();
-        isins.add("IRO1BRKT0001");
-        isins.add("IRO1KSHJ0001");
+        isin="IRO1KSHJ0001";//hekeshti
+        isin="IRO1TAMN0001";//شستا
+        isin="IRO3BDYZ0001";//day
 
-        ords.add("1300");
-        ords.add("730");
+//        ArrayList<String> isins = new ArrayList<>();
+//        ArrayList<String> ords = new ArrayList<>();
+//        ArrayList<String> prcs = new ArrayList<>();
+//        isins.add("IRO1BRKT0001");
+//        isins.add("IRO1KSHJ0001");
+//
+//        ords.add("1300");
+//        ords.add("730");
+//
+//        prcs.add("40880");
+//        prcs.add("74570");
 
-        prcs.add("40880");
-        prcs.add("74570");
 
 
+            String orderCount = "604";
+        String orderPrice = "70186";
 
-        String orderCount = "2679";
-        String orderPrice = "40880";
-
-        String req = "{\"IsSymbolCautionAgreement\":false,\"CautionAgreementSelected\":false,\"IsSymbolSepahAgreement\":false,\"SepahAgreementSelected\":false,\"orderCount\":" + orderCount + ",\"orderPrice\":" + orderPrice + ",\"FinancialProviderId\":1,\"minimumQuantity\":\"\",\"maxShow\":0,\"orderId\":0,\"isin\":"+isin+",\"orderSide\":65,\"orderValidity\":74,\"orderValiditydate\":null,\"shortSellIsEnabled\":false,\"shortSellIncentivePercent\":0}";
-
-        req = "{\"IsSymbolCautionAgreement\":false,\"CautionAgreementSelected\":false,\"IsSymbolSepahAgreement\":false,\"SepahAgreementSelected\":false,\"orderCount\":1402,\"orderPrice\":40880,\"FinancialProviderId\":1,\"minimumQuantity\":\"\",\"maxShow\":0,\"orderId\":0,\"isin\":\"IRO1KSHJ0001\",\"orderSide\":65,\"orderValidity\":74,\"orderValiditydate\":null,\"shortSellIsEnabled\":false,\"shortSellIncentivePercent\":0}";
+        String req = "";
+        req = "{\"IsSymbolCautionAgreement\":false,\"CautionAgreementSelected\":false,\"IsSymbolSepahAgreement\":false,\"SepahAgreementSelected\":false,\"orderCount\":"+orderCount+",\"orderPrice\":"+orderPrice+",\"FinancialProviderId\":1,\"minimumQuantity\":\"\",\"maxShow\":0,\"orderId\":0,\"isin\":\""+isin+"\",\"orderSide\":65,\"orderValidity\":74,\"orderValiditydate\":null,\"shortSellIsEnabled\":false,\"shortSellIncentivePercent\":0}";
 
         String cocike;
-        cocike = "GuidedTourVersion=1; SiteVersion=3.7.4; _ga=GA1.2.2099735577.1580370223; crisp-client%2Fsession%2Fe95056ad-2681-452d-976d-0c2a304165c9=session_413b3d4a-1eaa-47f4-b140-039b337e9ac7; _gid=GA1.2.136695747.1595577779; text0_-1309020272=true; text0_738292983=true; lastmessage-4=1; text0_-1938140084=true; lastmessage-6=65654; silverse=ycdsneqwizeqcc30j2no31a3; text0_971629429=true; .ASPXAUTH=CB23EF999E729E38EE9735F296DC5361C2142557B806C65DE68AD460E0E720F6EEA9D822AD8849D1D48C8F07BDF3322FF4EDF225917710FDA32E43EB46FBE53036622FA33B733ADA2760FC8E96BD92DEE30D0691235988DCEBD407331FDBB54CAEDF191621A22D44E0097417808B4446414AB98E9382918847421B791A14D622; Token=dc0ec9f4-5ac1-45ec-b1fe-8df95ff6a3ac";
-        cocike = "GuidedTourVersion=1; SiteVersion=3.7.4; _ga=GA1.2.2099735577.1580370223; crisp-client%2Fsession%2Fe95056ad-2681-452d-976d-0c2a304165c9=session_413b3d4a-1eaa-47f4-b140-039b337e9ac7; _gid=GA1.2.136695747.1595577779; text0_-1309020272=true; text0_738292983=true; lastmessage-4=1; text0_-1938140084=true; lastmessage-6=65654; silverse=ycdsneqwizeqcc30j2no31a3; text0_971629429=true; .ASPXAUTH=17C94920BB899765BD99C82F69D3756DF7FA9A17EFCA2A810EA3F5EB306BF9DF9857CC356B562CCE3F3C785FE2A5E7046ADD0E18D3600AE75157F7D43492BC7D0B26A2D1DBC60D23B9779234E064924B6A9A4CB05F3201B2259227FEE73F5419F2F91AAE2348CDBB23C815582B5F830C797F5C9CE43F1F4F3916C5E796E14F00; Token=26638a4d-166d-4c21-b770-13144fb9c321";
+        cocike = "GuidedTourVersion=1; SiteVersion=3.7.4; _ga=GA1.2.2099735577.1580370223; crisp-client%2Fsession%2Fe95056ad-2681-452d-976d-0c2a304165c9=session_413b3d4a-1eaa-47f4-b140-039b337e9ac7; _gid=GA1.2.1843848393.1596221132; lastmessage-4=1; lastmessage-6=1; text0_-1309020272=true; text0_1474283619=true; silverse=x4krzxfxghvmi0rn0qqjkboq; Token=6f66ab8e-bc14-4be2-9481-5e252a8e1c04; .ASPXAUTH=C58B7526DBBF96CB49FBDD5FA64EFF6DB5850FDDD87DF2C7E74B297A9B2C632D85AA6901CAB7E6B1ED5710E0D32037EC4684CAAFEF79F192432EAD77D7684AF1D3FADF5DAD9B3837918FF7FEB6D48248A37F9E7903577C046501D7166CBD72B85698E3D689BEDDE063E8CE42C7473789EE4F3D902FD9816A1CDFD9A7425874FA";
 
 
 
@@ -72,7 +73,7 @@ public class SarkhatApplication implements CommandLineRunner {
 
         LocalDateTime now = LocalDateTime.now().plusDays(0);
 
-        String myDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))+" 08:29:59.111";
+        String myDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))+" 08:29:57.555";
         LocalDateTime localDateTime = LocalDateTime.parse(myDate,
                 DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS"));
 /*
@@ -87,12 +88,23 @@ public class SarkhatApplication implements CommandLineRunner {
                 .toInstant().toEpochMilli();
 
 
+        //test correct of connection
+        for (int i = 0; i < 5; i++) {
+
+            String buystock = buystock(path, cocike, req);
+            System.out.println(buystock);
+        }
+
+
+
+
         while (true) {
             long l = System.currentTimeMillis();
             if (l >= timeorder)
             {
                 String buystock = buystock(path, cocike, req);
                 System.out.println(buystock);
+
 
 
 //                Thread.sleep(200);

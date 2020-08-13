@@ -19,7 +19,14 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava -->
+        <dependency>
+            <groupId>org.jsonschema2pojo</groupId>
+            <artifactId>jsonschema2pojo-core</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
+       <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava -->
         <dependency>
             <groupId>io.reactivex.rxjava3</groupId>
             <artifactId>rxjava</artifactId>

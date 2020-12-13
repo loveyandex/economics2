@@ -1,5 +1,7 @@
 package com.god.economics.crawllers.instagram.all;
 
+import com.god.economics.crawllers.instagram.LoginConfig;
+import com.god.economics.crawllers.instagram.all.closeapi.CLoneApiFunctionality;
 import com.god.economics.crawllers.instagram.clone.TimelineImage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -9,6 +11,7 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,17 +27,21 @@ public class UserDataAndPage {
 
         OkHttpClient client = new OkHttpClient();
         String usename = "adidas.tandis";
+        usename = "donya";
+        usename = "zhekond_plus";
         String url = "https://www.instagram.com/" + usename + "/?__a=1";
 
 
         Request request = new Request.Builder()
                 .url(url)
-                .header("cookie", "csrftoken=92rh9ugksst6s6P5wDDAAkjJdkIibV9j; ig_did=A30349A2-397A-49BC-BE9C-EA6994B5C2A8; mid=XzVkgAALAAGMsNEmH78Qob7DdcMS; ds_user_id=30299824247; sessionid=30299824247%3ATBS0U5dX8M8fgk%3A17; shbid=9033; shbts=1597334658.1844387; rur=ASH")
+                .header("cookie", LoginConfig.cookie)
                 .get()
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
+
+            System.out.println(string);
             JSONObject jsonObject = new JSONObject(string);
 
             if (jsonObject.isEmpty())
@@ -45,10 +52,13 @@ public class UserDataAndPage {
             JSONObject user = (JSONObject) (((JSONObject) graphql).get("user"));
 
 
-            String bio = ((String) user
+            @Nullable String bio = ((String) user
                     .get("biography"));
 
-            String rxternalurl = (String) user.get("external_url");
+            Object external_url = user.get("external_url");
+            @Nullable String rxternalurl = (String) external_url.toString();
+            Object id0 = user.get("id");
+            @Nullable String id = (String) id0.toString();
 
             String full_name = (String) user.get("full_name");
 
@@ -61,13 +71,17 @@ public class UserDataAndPage {
 
 
             boolean has_next_page = (boolean) page_info.get("has_next_page");
-            String end_cursor = (String) page_info.get("end_cursor");
+            String end_cursor = (String) page_info.get("end_cursor").toString();
+
+            if (has_next_page) {
+                new CLoneApiFunctionality(id).newEdges(end_cursor);
+            }
 
 
             ArrayList<Object> posts = new ArrayList<>();
             int k = 0;
-            while (k++ < 1) {
-                for (int i = 0; i < edges.length(); i++) {
+            while (k++ < 1 && posts.size() <= 5) {
+                for (int i = 0; i < edges.length() && posts.size() <= 5; i++) {
                     ArrayList<Object> objects = new ArrayList<>();
                     JSONObject edge = edges.getJSONObject(i);
                     JSONObject node = (JSONObject) edge
@@ -93,7 +107,7 @@ public class UserDataAndPage {
 
                     System.out.println(typename);
 
-                    String id = (String) ((JSONObject) node
+                    id = (String) ((JSONObject) node
                             .get("owner"))
                             .get("id");
                 }

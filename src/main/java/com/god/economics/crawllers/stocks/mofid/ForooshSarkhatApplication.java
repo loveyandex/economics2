@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class ForooshSarkhatApplication implements CommandLineRunner {
 
 
@@ -36,7 +36,7 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
         isin = "IRO1BRKT0001";//برکت
 
         isin = "IRO1KSHJ0001";//hekeshti
-        isin = "IRO1TAMN0001";//شستا
+        isin = "IRO1SNRO0001";//شستا
 
 //        ArrayList<String> isins = new ArrayList<>();
 //        ArrayList<String> ords = new ArrayList<>();
@@ -51,14 +51,14 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
 //        prcs.add("74570");
 
 
-        String orderCount = "6437";
-        String orderPrice = "37740";
+        String orderCount = "554";
+        String orderPrice = "8940";
 
         String req = "";
         req = "{\"IsSymbolCautionAgreement\":false,\"CautionAgreementSelected\":false,\"IsSymbolSepahAgreement\":false,\"SepahAgreementSelected\":false,\"orderCount\":" + orderCount + ",\"orderPrice\":" + orderPrice + ",\"FinancialProviderId\":1,\"minimumQuantity\":0,\"maxShow\":0,\"orderId\":0,\"isin\":\"" + isin + "\",\"orderSide\":\"86\",\"orderValidity\":74,\"orderValiditydate\":null,\"shortSellIsEnabled\":false,\"shortSellIncentivePercent\":0}";
 
         String cocike;
-        cocike = "authorization: BasicAuthentication 74511c37-6098-4cf5-adbb-25525f838bcf";
+        cocike = "BasicAuthentication 8060a193-af9e-45d2-afaa-d8450010dc4f";
 
 
         String path = "https://api2.mofidonline.com/Web/V1/Order/Post";
@@ -82,13 +82,13 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
                 .atZone(ZoneId.systemDefault())
                 .toInstant().toEpochMilli();
 
-
-        //test correct of connection
-        for (int i = 0; i < 5; i++) {
-
-            String buystock = buystock(path, cocike, req);
-            System.out.println(buystock);
-        }
+//
+//        //test correct of connection
+//        for (int i = 0; i < 5; i++) {
+//
+//            String buystock = buystock(path, cocike, req);
+//            System.out.println(buystock);
+//        }
 
 
         while (true) {
@@ -96,9 +96,7 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
             if (l >= timeorder) {
                 String buystock = buystock(path, cocike, req);
                 System.out.println(buystock);
-
-
-//                Thread.sleep(200);
+                Thread.sleep(10000);
 
             }
 
@@ -106,11 +104,6 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
             long x = l - millis;
             System.out.println(x);
             millis = l;
-//            if (((boolean) new JSONObject("{'name':false}").get("name"))) {
-//                break;
-//            }
-
-            Thread.sleep(2);
 
 
         }
@@ -126,7 +119,7 @@ public class ForooshSarkhatApplication implements CommandLineRunner {
 
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("content-type", "application/json");
-        httpPost.setHeader("authorization", "BasicAuthentication 74511c37-6098-4cf5-adbb-25525f838bcf");
+        httpPost.setHeader("authorization", cockie);
         httpPost.setHeader("user-agent", "Mozilla/6.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
         httpPost.setHeader("origin", "https://onlineplus.mofidonline.com");
         httpPost.setHeader("referer", "https://onlineplus.mofidonline.com/Home/Default/page-1");

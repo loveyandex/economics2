@@ -24,6 +24,7 @@ public class Unfollow {
         String[] ids = {"29703930020", "29703930020"};
 
         String id = ids[(int) (Math.random() * 1000000) % 2];
+        id = "38081432117";
         System.out.println(id);
 
         CloseableHttpClient client = HttpClients.createDefault();
@@ -31,23 +32,20 @@ public class Unfollow {
 //        id = "6875751076";// username: "ryhwne_mi" full_name: "ＲＥＹＨＡＮＥ🌙🌸️💫"
 //        id = "305851563";// username: reza golzar
         //TODO NEED TO BE AUTHENTICATED WITH COOCKIES
-        int number = 18;
+        int number = 24;
         String par = String.format("{\"id\":\"%s\",\"include_reel\":true,\"fetch_mutual\":false,\"first\":%d}", id, number);
         String ev = URLEncoder.encode(par);//first 1 i see
 
         String url = "https://www.instagram.com/graphql/query/?query_hash=d04b0a864b4b54837c0d870b0e77e076&variables=" + ev;
         HttpGet httpPost = new HttpGet(url);
 
-
-//        httpPost.setHeader("Accept", "application/json");
-//        httpPost.setHeader("referer", "https://www.instagram.com/p/B7nf91_hkaQ/");
-        httpPost.setHeader("x-csrftoken", "RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS");
+        httpPost.setHeader("x-csrftoken", "jYhVUQB2JqJfoTM5konL1rnurIJ96ruI");
         httpPost.setHeader("x-ig-app-id", "936619743392459");
-        httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
+        httpPost.setHeader("x-ig-www-claim", "hmac.AR2cugIZgXDMS7OrwO9szfy3SNejWHppB1sM8E8aoTPOrImh");
         httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
         httpPost.setHeader("x-requested-with", "XMLHttpRequest");
         httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-        httpPost.setHeader("cookie", "ig_cb=1; ig_did=027F2820-B3A3-45A1-A5CF-2584294C5471; mid=XjEyZAALAAG6caere89qJAbkDg_B; shbid=4534; shbts=1581593661.7225366; csrftoken=RapxhRAhqqW5gH8qMGCmiTtbi9OyAQVS; ds_user_id=29703930020; sessionid=29703930020%3AODlJy9nPhiKQ82%3A25; rur=VLL; urlgen=\"{\\\"198.16.70.51\\\": 174}:1j2eFa:yuQisY11jsRxc_PvpSYSHxZ9fzM\"");
+        httpPost.setHeader("cookie", "ig_cb=1; ig_did=D80D9A22-AE7C-4738-AE68-2170E3B7ABCB; mid=X3VrVAALAAGbmHg-JBNj1CCd4116; csrftoken=jYhVUQB2JqJfoTM5konL1rnurIJ96ruI; ds_user_id=38081432117; sessionid=38081432117%3ADgWBxO5I8JBmkk%3A27; shbid=13311; shbts=1601840044.436691; rur=FRC;");
 
         CloseableHttpResponse response = client.execute(httpPost);
 
@@ -95,13 +93,17 @@ public class Unfollow {
                 String followingid = (String) node.get("id");
                 if (!unfollow(followingid)) {
                     try {
-                        Thread.sleep(1000*60*4);
+                        Thread.sleep(1000 * 60 * 4);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     unfollow(followingid);
                 }
-
+                try {
+                    Thread.sleep(1000 * 1 * 4);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             System.out.println();
 
@@ -120,9 +122,9 @@ public class Unfollow {
 
         httpPost.setEntity(null);
         httpPost.setHeader("x-csrftoken", LoginConfig.csrftoken);
-        httpPost.setHeader("x-ig-app-id", "936619743392459");
-        httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
-        httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
+        httpPost.setHeader("x-ig-app-id", LoginConfig.igappid);
+        httpPost.setHeader("x-ig-www-claim", LoginConfig.IGCLAIM);
+//        httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
         httpPost.setHeader("x-requested-with", "XMLHttpRequest");
         httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
         httpPost.setHeader("cookie", LoginConfig.cookie);

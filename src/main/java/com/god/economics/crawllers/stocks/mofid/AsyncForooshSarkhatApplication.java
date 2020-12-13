@@ -17,7 +17,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class AsyncForooshSarkhatApplication implements CommandLineRunner {
 
 

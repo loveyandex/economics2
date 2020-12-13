@@ -1,5 +1,6 @@
 package com.god.economics.crawllers;
 
+import com.god.economics.crawllers.instagram.LoginConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -24,6 +25,7 @@ public class Reqs {
 
         Request request = new Request.Builder()
                 .url(url)
+                .addHeader("cookie",LoginConfig.cookie)
                 .build();
 
         try (

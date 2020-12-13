@@ -41,8 +41,6 @@ public class MahyaProtein {
     private String host = "https://www.digikala.com";
 
 
-
-
     @GetMapping("/pub")
     public String test() {
         return publicInstance;
@@ -50,12 +48,12 @@ public class MahyaProtein {
 
     @GetMapping("/pub2")
     public String tes2t() {
-        publicInstance="king in the north"+Math.random();
+        publicInstance = "king in the north" + Math.random();
         return publicInstance;
     }
 
 
-        @GetMapping("/root")
+    @GetMapping("/root")
     public void ss() {
 
 
@@ -63,12 +61,10 @@ public class MahyaProtein {
         item1.setQuantity(1212);
         itemRepository.save(item1);
 
-        System.exit(0);
-
 
         String url = "sd";
         url = "https://www.digikala.com/product/dkp-383379";
-        url = "https://www.digikala.com/search/category-accessoeys/";
+//        url = "https://www.digikala.com/search/category-accessoeys/";
         Document document = null;
         try {
             document = Jsoup.connect(url).get();
@@ -214,7 +210,7 @@ public class MahyaProtein {
         return "ok";
     }
 
-    private void getProductIds(String link) {
+    public void getProductIds(String link) {
         long unixtime = System.currentTimeMillis();
 
         try {

@@ -40,10 +40,12 @@ public class ClonePage {
 
     }
 
-    public void _clone(    ) throws IOException {
+    public void _clone() throws IOException {
 
         String url = "https://www.instagram.com/" + this.pageUserName + "/?__a=1";
         String resp = Reqs.getReq(url);
+
+        System.out.println(resp);
 
         JSONObject jsonObject = new JSONObject(resp);
 
@@ -73,12 +75,11 @@ public class ClonePage {
         System.out.println();
 
 
-
     }
 
 
     public static void main(String[] args) {
-        ClonePage donyaPage = new ClonePage.Builder().pageUserName("adidas.tandis").build();
+        ClonePage donyaPage = new ClonePage.Builder().pageUserName("zhekond_plus").build();
         try {
             donyaPage._clone();
 

@@ -35,7 +35,7 @@ public class V0LoginApi {
         CompletableFuture<Pair<Response, String>> responseFuture = new CompletableFuture<>();
         Request.Builder builder = new Request.Builder()
                 .url("https://www.instagram.com/accounts/login/ajax/");
-        String username = "dddddddd";
+        String username = "adidasberan";
         String password = "godisgreat";
         String encpass = String.format("#PWD_INSTAGRAM_BROWSER:0:%d:%s", System.currentTimeMillis() / 1000, password);
 
@@ -43,7 +43,7 @@ public class V0LoginApi {
         FormBody body = new FormBody.Builder()
                 .add("username", username)
                 .add("enc_password", encpass)
-                .add("queryParams", "")
+                .add("queryParams", "{}")
                 .add("optIntoOneTap", "false")
                 .build();
 

@@ -48,6 +48,8 @@ public class withnexttokenApplication implements CommandLineRunner {
         String cok="ig_cb=1; ig_did=13753609-3C4B-4F7C-90F8-BD83AD01F31D; mid=XysWIQALAAF87pJyPWzld3WgU42x; csrftoken=VOac5SxGQgZgUAwJ0E6qMwicUavO5JYA; sessionid=26898586489%3Aki41tkItQMmHgR%3A28; shbid=18485; shbts=1596659268.17796; ds_user_id=26898586489; rur=ASH; urlgen=\"{\\\"198.16.74.43\\\": 174}:1k3QGM:tOZafh3Uqv_uj99HXl-ZHmraSg4\"";
         cok = "ig_cb=2; ig_did=246836D0-1F7B-4C95-AD18-78A58EF7B588; mid=X8JgNQABAAGsDNtFcro-U2C4MdqM; csrftoken=1T73Zp5rrj9meoxEA0Nr1RpgGwoD1S7L; ds_user_id=30299824247; sessionid=30299824247%3AFT7dnTl5y0JQq2%3A7; shbid=9033; shbts=1607456246.2021677; rur=ASH; ig_direct_region_hint=FRC;";
 
+        cok = " csrftoken=S945ujWkCwHvrUnpqEVxqUCDFMwPeAJf; ig_did=6B1CFB64-F81E-43FC-AB14-05DCE395B80F; rur=NAO; mid=X9afRQALAAE1tGNjA_Soi1S6dlKL; sessionid=38081432117%3AgmQdGWWurMfwRe%3A12;";
+
 
 
         System.out.println(s);

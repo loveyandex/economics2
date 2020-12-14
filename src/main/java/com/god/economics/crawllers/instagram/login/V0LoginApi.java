@@ -1,6 +1,7 @@
 package com.god.economics.crawllers.instagram.login;
 
 import com.github.instagram4j.instagram4j.IGClient;
+import com.god.economics.crawllers.instagram.LoginConfig;
 import com.google.gson.Gson;
 import kotlin.Pair;
 import okhttp3.*;
@@ -62,7 +63,35 @@ public class V0LoginApi {
                 List<String> headers = response.headers("Set-Cookie");
                 new Gson().toJson(headers);
 
+
                 System.out.println(string);
+
+                String cookie = "";
+                String csrf = "";
+                for (String header : response.headers("set-cookie")) {
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.csrftoken)) {
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                        csrf = header.split(";")[0];
+                    }
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.sessionid))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.mid))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.ig_did))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.shbid))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.shbts))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                    if (header.contains(LoginConfig.CookieParamsForSendingFollow.rur))
+                        cookie = cookie + " " + header.split(";")[0] + ";";
+                }
+
+                System.out.println(cookie);
+                System.out.println(csrf);
+
+                System.out.println();
+
 
             }
         });

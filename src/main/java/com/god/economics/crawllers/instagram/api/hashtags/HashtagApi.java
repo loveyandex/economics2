@@ -19,7 +19,11 @@ import java.util.HashSet;
 public class HashtagApi {
 
     public static void main(String[] args) {
-        new HashtagApi("آرایشگاه").startGetUserIds(possibleUserIds -> {
+
+
+        HashtagApi آرایشگاه = new HashtagApi("آرایشگاه");
+
+        آرایشگاه.startGetUserIds(possibleUserIds -> {
             System.out.println(possibleUserIds.size());
             FileWriter writer;
             try {
@@ -51,8 +55,11 @@ public class HashtagApi {
 
             JSONObject jsonObject = new JSONObject(first);
 
-            JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) ((JSONObject) ((JSONArray) ((JSONObject) (jsonObject).get("entry_data")).get("TagPage")).getJSONObject(0)
-                    .get("graphql")).get("hashtag")).get("edge_hashtag_to_media"))
+            JSONObject jsonObject1 = (JSONObject) ((JSONArray) ((JSONObject) (jsonObject).get("entry_data")).get("TagPage")).getJSONObject(0)
+                    .get("graphql");
+
+
+            JSONArray postedges = (JSONArray) ((JSONObject) ((JSONObject) jsonObject1.get("hashtag")).get("edge_hashtag_to_media"))
                     .get("edges");
 
             HashSet<String> possibleUserIds = new HashSet<>();

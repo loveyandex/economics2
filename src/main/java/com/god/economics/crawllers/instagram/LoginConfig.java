@@ -5,7 +5,7 @@ package com.god.economics.crawllers.instagram;
  */
 
 public class LoginConfig {
-    public final static String cookie = "ig_cb=1; ig_did=D80D9A22-AE7C-4738-AE68-2170E3B7ABCB; mid=X3VrVAALAAGbmHg-JBNj1CCd4116; csrftoken=jYhVUQB2JqJfoTM5konL1rnurIJ96ruI; ds_user_id=38081432117; shbid=13311; sessionid=38081432117%3AeGyENEyyGDJ7Z9%3A19; shbts=1607738452.463118; rur=FRC; urlgen=\"{\\\"5.236.146.194\\\": 58224\\054 \\\"151.236.18.7\\\": 20836}:1knuTO:8_GPQfC0EuCzixVkaxvM2m_JER4\"";
+    public final static String cookie = "ig_cb=2; ig_did=246836D0-1F7B-4C95-AD18-78A58EF7B588; mid=X8JgNQABAAGsDNtFcro-U2C4MdqM; ds_user_id=30299824247; shbid=9033; ig_direct_region_hint=FRC; shbts=1607738432.4921987; csrftoken=3PNVY7vtxfRijHKuGbdaRigxZAi9ktw2; sessionid=30299824247%3A7Z0Wq5tWhGLF79%3A19; rur=FRC";
     public static final String IGCLAIM = "hmac.AR2cugIZgXDMS7OrwO9szfy3SNejWHppB1sM8E8aoTPOrHdw";
     public final static String csrftoken = "jYhVUQB2JqJfoTM5konL1rnurIJ96ruI";
     public static String igappid = "936619743392459";

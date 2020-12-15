@@ -1,4 +1,4 @@
-package com.god.economics.crawllers.instagram.api.hashtags.model;
+package com.god.economics.crawllers.instagram.api.hashtags.instamodel;
 
 public class ThumbnailResource {
     public String src;

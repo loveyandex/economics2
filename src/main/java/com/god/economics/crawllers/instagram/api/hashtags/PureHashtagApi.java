@@ -1,7 +1,7 @@
 package com.god.economics.crawllers.instagram.api.hashtags;
 
 import com.god.economics.crawllers.Reqs;
-import com.god.economics.crawllers.instagram.api.hashtags.model.PostNode;
+import com.god.economics.crawllers.instagram.api.hashtags.instamodel.PostNode;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;

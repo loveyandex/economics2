@@ -37,7 +37,7 @@ public class V0LoginApi {
         Request.Builder builder = new Request.Builder()
                 .url("https://www.instagram.com/accounts/login/ajax/");
         String username = "adidasberan";
-        String password = "godisgreat";
+        String password = "godisgreat19";
         String encpass = String.format("#PWD_INSTAGRAM_BROWSER:0:%d:%s", System.currentTimeMillis() / 1000, password);
 
 

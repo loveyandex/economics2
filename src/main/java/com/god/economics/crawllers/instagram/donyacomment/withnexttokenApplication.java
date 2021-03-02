@@ -41,14 +41,14 @@ public class withnexttokenApplication implements CommandLineRunner {
         shortcode = "CGsg12eLLy4";
         shortcode = "CHYZ00brgKu";
         shortcode = "CITdFVOlAXq";
-        shortcode = "CILZVXILPgQ";
+        shortcode = "CJ1q1QhLLiH";
         String s = "https://www.instagram.com/graphql/query/?query_hash=bc3296d1ce80a24b1b6e40b1e72903f5&variables=%7B%22shortcode%22%3A%22CCd7hH5pdy_%22%2C%22first%22%3A120%2C%22after%22%3A%22%7B%5C%22bifilter_token%5C%22%3A+%5C%22KDMBAgC4AP______________________________AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%5C%22%7D%22%7D";
         s = "https://www.instagram.com/graphql/query/?query_hash=bc3296d1ce80a24b1b6e40b1e72903f5&variables=%7B%22shortcode%22%3A%22"+shortcode+"%22%2C%22first%22%3A120%2C%22after%22%3A%22%7B%5C%22bifilter_token%5C%22%3A+%5C%22KDMBAgC4AP______________________________AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%5C%22%7D%22%7D";
 
         String cok="ig_cb=1; ig_did=13753609-3C4B-4F7C-90F8-BD83AD01F31D; mid=XysWIQALAAF87pJyPWzld3WgU42x; csrftoken=VOac5SxGQgZgUAwJ0E6qMwicUavO5JYA; sessionid=26898586489%3Aki41tkItQMmHgR%3A28; shbid=18485; shbts=1596659268.17796; ds_user_id=26898586489; rur=ASH; urlgen=\"{\\\"198.16.74.43\\\": 174}:1k3QGM:tOZafh3Uqv_uj99HXl-ZHmraSg4\"";
         cok = "ig_cb=2; ig_did=246836D0-1F7B-4C95-AD18-78A58EF7B588; mid=X8JgNQABAAGsDNtFcro-U2C4MdqM; csrftoken=1T73Zp5rrj9meoxEA0Nr1RpgGwoD1S7L; ds_user_id=30299824247; sessionid=30299824247%3AFT7dnTl5y0JQq2%3A7; shbid=9033; shbts=1607456246.2021677; rur=ASH; ig_direct_region_hint=FRC;";
 
-        cok = " csrftoken=S945ujWkCwHvrUnpqEVxqUCDFMwPeAJf; ig_did=6B1CFB64-F81E-43FC-AB14-05DCE395B80F; rur=NAO; mid=X9afRQALAAE1tGNjA_Soi1S6dlKL; sessionid=38081432117%3AgmQdGWWurMfwRe%3A12;";
+        cok = "ig_cb=2; ig_did=246836D0-1F7B-4C95-AD18-78A58EF7B588; mid=X8JgNQABAAGsDNtFcro-U2C4MdqM; csrftoken=cEfdYalA3hdfX8rEwaeHiJR7V2cbgKNo; ds_user_id=30299824247; sessionid=30299824247%3ANucKzHDmVbqPlh%3A9; shbid=13311; shbts=1610452153.8326871; rur=FRC;";
 
 
 

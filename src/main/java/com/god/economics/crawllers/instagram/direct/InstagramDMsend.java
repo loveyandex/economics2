@@ -1,5 +1,6 @@
 package com.god.economics.crawllers.instagram.direct;
 
+import com.god.economics.crawllers.instagram.LoginConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -41,13 +42,13 @@ public class InstagramDMsend {
 //        httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
         httpPost.setHeader("referer", "https://www.instagram.com/p/CB2tBhDnE0X/");
-        httpPost.setHeader("x-csrftoken", "1QTZjKVbrqUf3JgbacyrGrF74zDVQVBW");
+        httpPost.setHeader("x-csrftoken", LoginConfig.csrftoken);
         httpPost.setHeader("x-ig-app-id", "936619743392459");
         httpPost.setHeader("x-ig-www-claim", "hmac.AR050a6T1x8GV3ajRljbbHZ8PdDvHeGf92e5aat3GEOxYby_\n");
         httpPost.setHeader("x-instagram-ajax", "4c064cca12e4");
         httpPost.setHeader("x-requested-with", "XMLHttpRequest");
         httpPost.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-        httpPost.setHeader("cookie", "g_cb=1; mid=XKH3nQALAAHhnv9Y7d2jG33GUBXa; ig_did=B4A9D94B-4507-4326-BDA7-6FAF7D9398D0; datr=fZAjXhUwOXatDeFYjwO3kBAj; shbid=9033; csrftoken=gjIbkNgCQ7klAZKOpBQTmwZjzHi3IAM5; ds_user_id=30299824247; sessionid=30299824247%3AZm6CiDhNYe8wco%3A8; shbts=1596127512.6155002; rur=FRC; urlgen=\"{\\\"5.236.145.154\\\": 58224\\054 \\\"5.239.198.220\\\": 58224}:1k1NGS:p8Ws4JCwztHMC7EAVh-in-u8HJY\"");
+        httpPost.setHeader("cookie", LoginConfig.cookie);
 
         CloseableHttpResponse response = client.execute(httpPost);
 

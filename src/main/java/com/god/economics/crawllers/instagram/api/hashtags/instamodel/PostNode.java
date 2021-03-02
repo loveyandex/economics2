@@ -18,4 +18,9 @@ public class PostNode {
     public List<ThumbnailResource> thumbnail_resources;
     public Dimensions dimensions;
     public EdgeMediaPreviewLike edge_media_preview_like;
+
+    static enum MediaType{
+        GraphImage,GraphSidecar
+
+    }
 }

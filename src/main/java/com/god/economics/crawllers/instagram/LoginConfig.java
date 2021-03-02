@@ -5,9 +5,11 @@ package com.god.economics.crawllers.instagram;
  */
 
 public class LoginConfig {
-    public final static String cookie = "ig_cb=2; ig_did=246836D0-1F7B-4C95-AD18-78A58EF7B588; mid=X8JgNQABAAGsDNtFcro-U2C4MdqM; ds_user_id=30299824247; shbid=9033; ig_direct_region_hint=FRC; shbts=1607738432.4921987; csrftoken=3PNVY7vtxfRijHKuGbdaRigxZAi9ktw2; sessionid=30299824247%3A7Z0Wq5tWhGLF79%3A19; rur=FRC";
+    public final static String cookie = "ig_did=A726D8F8-CADC-4764-AD82-E9E120FA7F8F; mid=X9aC-AALAAGhYsEF1SXn51feWnPU; ig_nrcb=1; shbid=13311; shbts=1607895675.4561968; ds_user_id=45143507336; rur=FRC; csrftoken=h982xyRUT5CeQwglfLVFy4ArPJzvxNra; sessionid=45143507336%3ACTs3joPTiryfFg%3A3;";
+
+
     public static final String IGCLAIM = "hmac.AR2cugIZgXDMS7OrwO9szfy3SNejWHppB1sM8E8aoTPOrHdw";
-    public final static String csrftoken = "jYhVUQB2JqJfoTM5konL1rnurIJ96ruI";
+    public final static String csrftoken = "h982xyRUT5CeQwglfLVFy4ArPJzvxNra";
     public static String igappid = "936619743392459";
 
 

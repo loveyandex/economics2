@@ -1,15 +1,9 @@
 package com.god.economics.crawllers.instagram.api.story;
 
-import com.abfzl.J;
+
 import com.github.instagram4j.instagram4j.IGClient;
-import com.github.instagram4j.instagram4j.actions.feed.FeedIterable;
 import com.github.instagram4j.instagram4j.actions.timeline.TimelineAction;
 import com.github.instagram4j.instagram4j.exceptions.IGLoginException;
-import com.github.instagram4j.instagram4j.models.user.Profile;
-import com.github.instagram4j.instagram4j.requests.friendships.FriendshipsFeedsRequest;
-import com.github.instagram4j.instagram4j.requests.media.MediaConfigureSidecarRequest;
-import com.github.instagram4j.instagram4j.responses.IGResponse;
-import com.github.instagram4j.instagram4j.responses.feed.FeedUsersResponse;
 import com.github.instagram4j.instagram4j.responses.users.UsersSearchResponse;
 import com.github.instagram4j.instagram4j.utils.IGUtils;
 import com.google.gson.Gson;
@@ -21,17 +15,11 @@ import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.lang.String;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -58,7 +46,7 @@ public class run {
                 cookFile = new File("cookie.ser");
         SerializableCookieJar jar = new SerializableCookieJar();
         IGClient lib = new IGClient.Builder()
-                .username("gallerygall")
+                .username("takhfifelon")
                 .password("godisgreat")
                 .client(formTestHttpClient(jar))
                 .onLogin((cli, lr) -> Assert.assertEquals("ok", lr.getStatus()))
@@ -73,10 +61,21 @@ public class run {
     }
 
 
-    public static IGClient igClient() throws Exception {
+    public static IGClient saveigClient(IGClient lib) throws Exception {
         File to = new File("igclient.ser"),
                 cookFile = new File("cookie.ser");
         SerializableCookieJar jar = new SerializableCookieJar();
+        serialize(lib, to);
+        serialize(jar, cookFile);
+        IGClient saved = IGClient.from(new FileInputStream(to),
+                formTestHttpClient(deserialize(cookFile, SerializableCookieJar.class)));
+        log.debug(lib.toString());
+        return saved;
+    }
+
+
+    public static IGClient igClient() throws Exception {
+        File to = new File("igclient.ser"), cookFile = new File("cookie.ser");
 
         return IGClient.from(new FileInputStream(to),
                 formTestHttpClient(deserialize(cookFile, SerializableCookieJar.class)));
@@ -153,7 +152,6 @@ public class run {
             File output = new File("output.jpg");
             ImageIO.write(bufferedImageu, "jpg", output);
             System.err.println("uploading ");
-
 
 
             List<TimelineAction.SidecarInfo> infos = new ArrayList<>();

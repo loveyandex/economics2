@@ -24,8 +24,10 @@ public class incredibleOffers {
             Elements script1 = document.head().getElementsByTag("script");
             Element script = script1.get(9);
 
-            JSONArray offrs = (JSONArray) ((JSONObject) ((JSONObject) new JSONArray(document.head().getElementsByTag("script").get(3).html()
-                    .split(" var dataLayerData =")[1].split("]}}];")[0] + "]}}]").get(0))
+            Elements script2 = document.head().getElementsByTag("script");
+            String html = script2.get(3).html();
+            JSONArray offrs = (JSONArray) ((JSONObject) ((JSONObject) new JSONArray(html
+                    .split("window.dataLayerData =")[1].split("]}}];")[0] + "]}}]").get(0))
                     .get("ecommerce")).get("impressions");
 
             for (int i = 0; i < offrs.length(); i++) {

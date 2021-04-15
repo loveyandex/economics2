@@ -80,7 +80,7 @@ public class incredibleOffers2 {
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-1; i >27; i--) {
+            for (int i = nodes.size()-33+5; i >=0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -91,11 +91,12 @@ public class incredibleOffers2 {
 
                     Node node3 = node2.childNodes().get(1);
                     String title = node3.attr("title");
-                    String imgsrc = node3.childNodes().get(0).attr("src");
+                    System.out.println(title);
+                    String imgsrc = node3.childNodes().get(1).attr("src");
                     if (imgsrc=="")
                         continue;
 
-                    Node node4 = childNode.childNodes().get(1).childNodes().get(4);
+                    Node node4 = childNode.childNodes().get(1).childNodes().get(5);
                     Element element = (Element) node4;
                     Elements del = element.getElementsByTag("del");
                     if (del.size()==0)
@@ -126,6 +127,11 @@ public class incredibleOffers2 {
                         t = t + s2;
                     }
 
+                    t = t + "#takhfif"+ "\n";
+                    t = t + "#"+"تخفیف"+ "\n";
+                    t = t +"#"+"تخفیفان"+ "\n";
+                    t = t +"#"+"تخفیفدار"+ "\n";
+
                     String caption = caption0 + "\n\n\n\n\n\n" + t;
 
 
@@ -134,6 +140,7 @@ public class incredibleOffers2 {
                             caption).get();
 
 
+                    Thread.sleep(1000*60*6);
                     System.out.println(childNode.toString());
                 }
 

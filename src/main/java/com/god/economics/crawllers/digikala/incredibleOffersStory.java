@@ -1,15 +1,13 @@
 package com.god.economics.crawllers.digikala;
 
 import com.github.instagram4j.instagram4j.IGClient;
-import com.github.instagram4j.instagram4j.responses.media.MediaResponse;
+import com.github.instagram4j.instagram4j.models.media.reel.item.ReelMetadataItem;
+import com.github.instagram4j.instagram4j.models.media.reel.item.StoryCountdownsItem;
 import com.github.instagram4j.instagram4j.utils.IGUtils;
 import com.god.economics.crawllers.instagram.api.story.SerializableCookieJar;
-import com.god.economics.crawllers.instagram.api.story.run;
-import com.god.economics.crawllers.instagram.login.LoginWith;
+import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,14 +18,16 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * created By gOD on 10/6/2020 9:12 PM
  */
 
-public class incredibleOffers2 {
+public class incredibleOffersStory {
 
     @SneakyThrows
     public static void serialize(Object o, File to) {
@@ -80,7 +80,7 @@ public class incredibleOffers2 {
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-1; i >= 0; i--) {
+            for (int i = nodes.size()-30; i >=0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -146,13 +146,17 @@ public class incredibleOffers2 {
 
                     String caption = caption0 + "\n\n\n\n" + t;
 
-
+                    StoryCountdownsItem qCountdown = StoryCountdownsItem.builder().text(title)
+                            .end_ts((System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)) / 1000)
+                            .following_enabled(false)
+                            .build();
                     System.out.println(caption);
-                    igClient.getActions().timeline().uploadPhoto(output,
-                            caption).get();
+                    List<ReelMetadataItem> storyCountdownsItems = Arrays.asList(qCountdown);
+                    System.out.println(igClient.getActions().story().uploadPhoto(output,storyCountdownsItems)
+                            .get());
 
 
-                    Thread.sleep(1000*60*13);
+                    Thread.sleep(1000*60*17);
                     System.out.println(childNode.toString());
                 }
 

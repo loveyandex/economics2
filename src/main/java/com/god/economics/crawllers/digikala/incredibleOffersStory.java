@@ -80,7 +80,7 @@ public class incredibleOffersStory {
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-30; i >=0; i--) {
+            for (int i = nodes.size()-30-1; i >=0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -148,6 +148,9 @@ public class incredibleOffersStory {
 
                     StoryCountdownsItem qCountdown = StoryCountdownsItem.builder().text(title)
                             .end_ts((System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)) / 1000)
+                            .x(0.4)
+                            .y(0.4)
+                            .width(0.0001)
                             .following_enabled(false)
                             .build();
                     System.out.println(caption);

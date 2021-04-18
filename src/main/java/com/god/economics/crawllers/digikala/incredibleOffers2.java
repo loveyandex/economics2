@@ -80,7 +80,7 @@ public class incredibleOffers2 {
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-1; i >= 0; i--) {
+            for (int i = nodes.size()-30; i >= 0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {

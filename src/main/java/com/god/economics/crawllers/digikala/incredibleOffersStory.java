@@ -80,7 +80,7 @@ public class incredibleOffersStory {
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-30-1; i >=0; i--) {
+            for (int i = nodes.size()-35; i >=0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -147,16 +147,18 @@ public class incredibleOffersStory {
                     String caption = caption0 + "\n\n\n\n" + t;
 
                     StoryCountdownsItem qCountdown = StoryCountdownsItem.builder().text(title)
-                            .end_ts((System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24)) / 1000)
-                            .x(0.4)
-                            .y(0.4)
-                            .width(0.0001)
+                            .end_ts((System.currentTimeMillis() + TimeUnit.HOURS.toMillis(3)) / 1000)
+                            .x(0.5)
+                            .y(0.28)
+                            .width(0.25)
+                            .height(0.25)
                             .following_enabled(false)
                             .build();
+
                     System.out.println(caption);
                     List<ReelMetadataItem> storyCountdownsItems = Arrays.asList(qCountdown);
-                    System.out.println(igClient.getActions().story().uploadPhoto(output,storyCountdownsItems)
-                            .get());
+                   igClient.getActions().story().uploadPhoto(output,storyCountdownsItems)
+                            .get();
 
 
                     Thread.sleep(1000*60*17);

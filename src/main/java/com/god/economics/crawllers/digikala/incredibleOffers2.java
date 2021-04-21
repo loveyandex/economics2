@@ -66,21 +66,19 @@ public class incredibleOffers2 {
 
     }
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        public static void main(String[] args) throws ExecutionException, InterruptedException {
         try {
             Document document = Jsoup.connect("https://www.digikala.com/incredible-offers/").get();
             Element cproductlist__content = document.getElementsByClass("c-product-list__content").get(0);
 
             String takhfifelon = "takhfifelon";
             String godisgreat = "godisgreat";
-//            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
+            ///            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
             IGClient igClient =igClient();
-
-
 
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-30; i >= 0; i--) {
+            for (int i = nodes.size()-1; i >= 0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -134,15 +132,21 @@ public class incredibleOffers2 {
                     if(s.length>2)
                         t += "#" + s[0] + "_" + s[1] +  "_" + s[2] + "\n";
 
-                    for (String s1 : s) {
+                    for (int j = 0; j < 5  ; j++) {
+                        String s1 = s[j];
                         String s2 = "#" + s1 + "\n";
                         t = t + s2;
                     }
 
+                    t = t + "#takhfifelon"+ "\n";
+                    t = t + "#تخفیفلن"+ "\n";
                     t = t + "#takhfif"+ "\n";
                     t = t + "#"+"تخفیف"+ "\n";
                     t = t +"#"+"تخفیفان"+ "\n";
                     t = t +"#"+"تخفیفدار"+ "\n";
+                    t = t +"#"+"\u200Eاستایل #مانتوتابستانه #مانتو #مانتو_خاص  #استایل_خودتو_داشته_باش #استایل_ایرانی \u200F#style #styles #styler #ir_style_magazine\n" +
+                            "#irstyle #irstylemagazine"+ "\n";
+
 
                     String caption = caption0 + "\n\n\n\n" + t;
 

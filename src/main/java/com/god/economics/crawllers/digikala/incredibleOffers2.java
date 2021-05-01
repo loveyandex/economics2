@@ -58,7 +58,8 @@ public class incredibleOffers2 {
     }
 
     public static IGClient igClient() throws Exception {
-        File to = new File("igclient.ser"), cookFile = new File("cookie.ser");
+        File to = new File("igclient.ser"),
+                cookFile = new File("cookie.ser");
 
         return IGClient.from(new FileInputStream(to),
                 formTestHttpClient(deserialize(cookFile, SerializableCookieJar.class)));
@@ -73,8 +74,8 @@ public class incredibleOffers2 {
 
             String takhfifelon = "takhfifelon";
             String godisgreat = "godisgreat";
-            ///            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
-            IGClient igClient =igClient();
+            //   IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
+         IGClient igClient =igClient();
 
             List<Node> nodes = cproductlist__content.childNodes();
 
@@ -132,7 +133,7 @@ public class incredibleOffers2 {
                     if(s.length>2)
                         t += "#" + s[0] + "_" + s[1] +  "_" + s[2] + "\n";
 
-                    for (int j = 0; j < 5  ; j++) {
+                    for (int j = 0; j < 5 && j<s.length ; j++) {
                         String s1 = s[j];
                         String s2 = "#" + s1 + "\n";
                         t = t + s2;

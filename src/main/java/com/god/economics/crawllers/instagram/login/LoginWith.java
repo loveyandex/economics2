@@ -1,16 +1,20 @@
 package com.god.economics.crawllers.instagram.login;
 
 import com.github.instagram4j.instagram4j.IGClient;
+import com.github.instagram4j.instagram4j.actions.users.UserAction;
 import com.github.instagram4j.instagram4j.exceptions.IGLoginException;
 import com.github.instagram4j.instagram4j.utils.IGUtils;
 import com.god.economics.crawllers.instagram.api.story.SerializableCookieJar;
 import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
+import org.junit.Assert;
 
 import java.io.*;
+import java.util.concurrent.CompletableFuture;
+
+import static com.god.economics.crawllers.instagram.api.story.run.saveigClient;
 
 public class LoginWith {
-
 
 
     @SneakyThrows
@@ -41,21 +45,42 @@ public class LoginWith {
                 cookFile = new File("cookie.ser");
 
         OkHttpClient build = IGUtils.defaultHttpClientBuilder().cookieJar(deserialize(cookFile, SerializableCookieJar.class)).build();
-        return IGClient.from(new FileInputStream(to),build);
+        return IGClient.from(new FileInputStream(to), build);
 
 
     }
 
 
-    public static IGClient loginwithusernamepass(String username, String password) throws IGLoginException {
-        return IGClient.builder().username(username)
-                .password(password)
+    public static IGClient loginwithusernamepass(String username, String password) throws IOException, ClassNotFoundException {
+        try {
+            IGClient igClient = igClient();
+            CompletableFuture<UserAction> instagram = igClient.actions().users().findByUsername("instagram");
+
+
+        } catch (Exception e) {
+        }
+        File to = new File("igclient.ser"),
+                cookFile = new File("cookie.ser");
+        SerializableCookieJar jar = new SerializableCookieJar();
+        IGClient lib = new IGClient.Builder()
+                .username("takhfifelon")
+                .password("godisgreat")
+                .client(formTestHttpClient(jar))
+                .onLogin((cli, lr) -> Assert.assertEquals("ok", lr.getStatus()))
                 .login();
+        serialize(lib, to);
+        serialize(jar, cookFile);
+        IGClient saved = IGClient.from(new FileInputStream(to),
+                formTestHttpClient(deserialize(cookFile, SerializableCookieJar.class)));
+        return lib;
 
     }
 
 
 
+    public static OkHttpClient formTestHttpClient(SerializableCookieJar jar) {
+        return IGUtils.defaultHttpClientBuilder().cookieJar(jar).build();
+    }
 
 
 

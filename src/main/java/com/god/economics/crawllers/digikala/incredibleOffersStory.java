@@ -5,6 +5,7 @@ import com.github.instagram4j.instagram4j.models.media.reel.item.ReelMetadataIte
 import com.github.instagram4j.instagram4j.models.media.reel.item.StoryCountdownsItem;
 import com.github.instagram4j.instagram4j.utils.IGUtils;
 import com.god.economics.crawllers.instagram.api.story.SerializableCookieJar;
+import com.god.economics.crawllers.instagram.login.LoginWith;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
@@ -73,10 +74,9 @@ public class incredibleOffersStory {
 
             String takhfifelon = "takhfifelon";
             String godisgreat = "godisgreat";
-//            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
-            IGClient igClient =igClient();
+//                       IGClient igClient =igClient();
 
-
+            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
 
             List<Node> nodes = cproductlist__content.childNodes();
 

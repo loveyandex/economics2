@@ -63,8 +63,33 @@ public class LoginWith {
                 cookFile = new File("cookie.ser");
         SerializableCookieJar jar = new SerializableCookieJar();
         IGClient lib = new IGClient.Builder()
-                .username("takhfifelon")
-                .password("godisgreat")
+                .username(username)
+                .password(password)
+                .client(formTestHttpClient(jar))
+                .onLogin((cli, lr) -> Assert.assertEquals("ok", lr.getStatus()))
+                .login();
+        serialize(lib, to);
+        serialize(jar, cookFile);
+        IGClient saved = IGClient.from(new FileInputStream(to),
+                formTestHttpClient(deserialize(cookFile, SerializableCookieJar.class)));
+        return lib;
+
+    }
+
+    public static IGClient loginwithusernamepass(String username, String password, String userfilename) throws IOException, ClassNotFoundException {
+        try {
+            IGClient igClient = igClient();
+            CompletableFuture<UserAction> instagram = igClient.actions().users().findByUsername("instagram");
+
+
+        } catch (Exception e) {
+        }
+        File to = new File(String.format("igclient_%s.ser", userfilename)),
+                cookFile = new File(String.format("cookie_%s.ser", userfilename));
+        SerializableCookieJar jar = new SerializableCookieJar();
+        IGClient lib = new IGClient.Builder()
+                .username(username)
+                .password(password)
                 .client(formTestHttpClient(jar))
                 .onLogin((cli, lr) -> Assert.assertEquals("ok", lr.getStatus()))
                 .login();
@@ -77,12 +102,9 @@ public class LoginWith {
     }
 
 
-
     public static OkHttpClient formTestHttpClient(SerializableCookieJar jar) {
         return IGUtils.defaultHttpClientBuilder().cookieJar(jar).build();
     }
-
-
 
 
 }

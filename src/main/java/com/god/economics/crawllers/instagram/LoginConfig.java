@@ -5,7 +5,7 @@ package com.god.economics.crawllers.instagram;
  */
 
 public class LoginConfig {
-    public final static String cookie = "ig_did=A726D8F8-CADC-4764-AD82-E9E120FA7F8F; mid=X9aC-AALAAGhYsEF1SXn51feWnPU; ig_nrcb=1; shbid=13311; shbts=1607895675.4561968; ds_user_id=45143507336; rur=FRC; csrftoken=h982xyRUT5CeQwglfLVFy4ArPJzvxNra; sessionid=45143507336%3ACTs3joPTiryfFg%3A3;";
+    public final static String cookie = "mid=YeiDzgALAAHt4ZgjMJLbka5zvUrU; ig_did=A3FF0530-90AD-451E-B2D0-3B7E9B00D973; ig_nrcb=1; csrftoken=fjWWNFORQrAcZvkWVUu0QLpT11u5vvBv; ds_user_id=48586000684; sessionid=48586000684%3ALUgXxuWN8cmtJW%3A6; shbid=\"550\\05448586000684\\0541674758828:01f7f592c3374b9304d06eaee4a0491b2b0730d03efe991b34550318fef48357b426dc49\"; shbts=\"1643222828\\05448586000684\\0541674758828:01f746b308a364cdac055278bfc04297066409425d0bb6298ea5a89dfbcab42e2b05b761\"; rur=\"LDC\\05448586000684\\0541674871478:01f721d0d59337533fd80db89f3e73de5993e1a5944c9874d33b022b967bef3923cab6f5\"";
 
 
     public static final String IGCLAIM = "hmac.AR2cugIZgXDMS7OrwO9szfy3SNejWHppB1sM8E8aoTPOrHdw";

@@ -70,6 +70,7 @@ public class LoginApp implements CommandLineRunner {
                 thread.getItems().forEach(instagramInboxThreadItem -> {
 
                     System.err.println(new Gson().toJson(instagramInboxThreadItem));
+                    System.err.println("new Gson().toJson(instagramInboxThreadItem)");
 
 
                 });

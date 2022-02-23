@@ -22,9 +22,18 @@ import java.util.Optional;
  * created By gOD on 7/10/2020 9:33 AM
  */
 
-@Component
+//@Component
 public class LoggedCommnets {
-    public static void main(UserCommentedRepository userCommentedRepository, String shortcode, String[] args, String cookie) throws IOException {
+
+    public static void main(String[] args) throws IOException {
+        main(null, "CRwCnwkLzwG",
+                "mid=YHRHbwALAAEKf0-5tAO5z5eOw_eR; ig_did=10F7C4EF-0BA7-457A-BE09-0220E2D50FA7; ds_user_id=46965647003; csrftoken=W4kU14cX1tVmVpn5QfT5oYx6nRv9VxFA; sessionid=46965647003%3Al0vUwbM2EAO6QI%3A5; shbid=\"18799\\05446965647003\\0541659020956:01f7034a205db8e535fea0338cd2ff50bb0e744a67c05a352c7dfcf5aec19df74ba89a50\"; shbts=\"1627484956\\05446965647003\\0541659020956:01f72aa8199d1c43f4d4d33c3d2507ca41922f418a3e64dc5e0f0a3fee3bbefc9d8d6a9c\"; rur=\"VLL\\05446965647003\\0541659034408:01f79837f0e43f32935c27d8303b63afef255c670d9045b3536bc1a3f9dbb9cc34449b7c\"");
+
+
+    }
+
+
+    public static void main(UserCommentedRepository userCommentedRepository, String shortcode, String cookie) throws IOException {
 
         CloseableHttpClient client = HttpClients.createDefault();
 
@@ -160,7 +169,7 @@ public class LoggedCommnets {
             Integer created_at = (Integer) ((JSONObject) jsonObject.get("node")).get("created_at");
             java.util.Date time = new java.util.Date((long) created_at * 1000);
 
-            Optional<InstaUserComments> userCommentsOptional = userCommentedRepository.findByUserid(userid);
+//            Optional<InstaUserComments> userCommentsOptional = userCommentedRepository.findByUserid(userid);
 //            OptionalConsumer<Optional<InstaUserComments>> of = OptionalConsumer
 //                    .of(instaUserComments -> {
 //                        InstaUserComments instaUserComments1 = instaUserComments.get();
@@ -169,16 +178,16 @@ public class LoggedCommnets {
 //
 //                    });
 
-            if (userCommentsOptional.isPresent()) {
-                InstaUserComments instaUserComments = userCommentsOptional.get();
-                instaUserComments.getComments().add(text);
-                userCommentedRepository.save(instaUserComments);
-            }else {
-                userCommentedRepository.save(new InstaUserComments()
-                        .addCommnet(text)
-                        .setUserid(userid)
-                        .setUsername(username));
-            }
+//            if (userCommentsOptional.isPresent()) {
+//                InstaUserComments instaUserComments = userCommentsOptional.get();
+//                instaUserComments.getComments().add(text);
+//                userCommentedRepository.save(instaUserComments);
+//            }else {
+//                userCommentedRepository.save(new InstaUserComments()
+//                        .addCommnet(text)
+//                        .setUserid(userid)
+//                        .setUsername(username));
+//            }
 
             System.out.println(username + "   " + text + " " + time);
         }
@@ -229,5 +238,8 @@ public class LoggedCommnets {
 
 
     }
+
+
+
 
 }

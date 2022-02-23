@@ -80,6 +80,12 @@ public class WithUrlLoggedCommnets {
                     .get("end_cursor");
             proccessEdges(commentedRepository, edges);
             System.out.println();
+
+            try {
+                Thread.sleep(1000*5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 //             StreamSupport.stream(edges.spliterator(), true)
 //             .forEach(o -> ((JSONObject) o).get("node"));

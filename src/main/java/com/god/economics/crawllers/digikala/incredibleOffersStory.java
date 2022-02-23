@@ -1,6 +1,7 @@
 package com.god.economics.crawllers.digikala;
 
 import com.github.instagram4j.instagram4j.IGClient;
+import com.github.instagram4j.instagram4j.models.media.reel.item.ReelMentionsItem;
 import com.github.instagram4j.instagram4j.models.media.reel.item.ReelMetadataItem;
 import com.github.instagram4j.instagram4j.models.media.reel.item.StoryCountdownsItem;
 import com.github.instagram4j.instagram4j.utils.IGUtils;
@@ -9,6 +10,8 @@ import com.god.economics.crawllers.instagram.login.LoginWith;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import okhttp3.OkHttpClient;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -74,13 +77,12 @@ public class incredibleOffersStory {
 
             String takhfifelon = "takhfifelon";
             String godisgreat = "godisgreat";
-//                       IGClient igClient =igClient();
 
-            IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
-
+            //             IGClient igClient = LoginWith.loginwithusernamepass(takhfifelon, godisgreat);
+                IGClient igClient =igClient();
             List<Node> nodes = cproductlist__content.childNodes();
 
-            for (int i = nodes.size()-35; i >=0; i--) {
+            for (int i = nodes.size()-1-2; i >=0; i--) {
                 Node node = nodes.get(i);
                 List<Node> childNodes = node.childNodes();
                 for (Node childNode : childNodes) {
@@ -89,8 +91,20 @@ public class incredibleOffersStory {
 
                     Node node2 = childNode.childNodes().get(1);
 
+
+                    Elements aClass = ((Element) node2).getElementsByAttributeValue("class", "c-product-box__title  js-ab-not-app-incredible-product");
+                    String text ="" ;
+                    if (aClass.size()>0) {
+                        text = aClass.get(0).text();
+                    }
+
+
                     Node node3 = node2.childNodes().get(1);
                     String title = node3.attr("title");
+
+                    title = text;
+
+
                     System.out.println(title);
                     List<Node> nodes1 = node3.childNodes();
                     if (nodes1.size()==0)
@@ -155,14 +169,28 @@ public class incredibleOffersStory {
                             .following_enabled(false)
                             .build();
 
+                    ReelMentionsItem reelMentionsItem = ReelMentionsItem.builder().user_id("48365060212")
+                            .x(0.5)
+                            .y(0.28)
+                            .width(0.25)
+                            .height(0.25).build();
+
+                    List<ReelMetadataItem> reelMentionsItems = Arrays.asList(reelMentionsItem);
+
+
+
                     System.out.println(caption);
                     List<ReelMetadataItem> storyCountdownsItems = Arrays.asList(qCountdown);
-                   igClient.getActions().story().uploadPhoto(output,storyCountdownsItems)
+
+
+                   igClient.getActions().story().uploadPhoto(output,reelMentionsItems)
                             .get();
 
 
-                    Thread.sleep(1000*60*17);
+
                     System.out.println(childNode.toString());
+
+                    Thread.sleep(1000*60*6);
                 }
 
             }

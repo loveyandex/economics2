@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-//@SpringBootApplication
+ @SpringBootApplication
 public class withnexttokenApplication implements CommandLineRunner {
 
     @Autowired
@@ -43,7 +42,7 @@ public class withnexttokenApplication implements CommandLineRunner {
         shortcode = "CITdFVOlAXq";
         shortcode = "CJ1q1QhLLiH";
         shortcode = "CSG_FfELfUA";
-        shortcode = "CYougfBt6HW";
+        shortcode = "CazaN_aLUZw";
         String s = "https://www.instagram.com/graphql/query/?query_hash=bc3296d1ce80a24b1b6e40b1e72903f5&variables=%7B%22shortcode%22%3A%22CCd7hH5pdy_%22%2C%22first%22%3A120%2C%22after%22%3A%22%7B%5C%22bifilter_token%5C%22%3A+%5C%22KDMBAgC4AP______________________________AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%5C%22%7D%22%7D";
         s = "https://www.instagram.com/graphql/query/?query_hash=bc3296d1ce80a24b1b6e40b1e72903f5&variables=%7B%22shortcode%22%3A%22"+shortcode+"%22%2C%22first%22%3A120%2C%22after%22%3A%22%7B%5C%22bifilter_token%5C%22%3A+%5C%22KDMBAgC4AP______________________________AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA%5C%22%7D%22%7D";
 
@@ -53,10 +52,10 @@ public class withnexttokenApplication implements CommandLineRunner {
         cok = "mid=YGx2LgALAAFzv6kYHQrS0iOfOWwE; ig_did=7E5ACD6D-EDAF-421B-BBD0-D60E5D428C15; shbid=13311; shbts=1624406764.4793892; rur=PRN; ds_user_id=38081432117; sessionid=38081432117%3AQM5aCtO0QrnViI%3A7; csrftoken=QnanSQhfCviS0KgwmFNlaZKYqD68gTWN";
 
         cok = "mid=YNRjBAALAAFgrrBwMRRmx9GD1lFs; ig_did=5DB39C23-A78A-4232-87ED-D8A48FF4613A; csrftoken=qzyM9xMlaIkfztbdNAQSexuqRaQ9VThy; ds_user_id=48365060212; sessionid=48365060212%3ArgmZPLiTJKIQnS%3A10; shbid=\"12891\\05448365060212\\0541661893053:01f7926503ba3df12d64078c42423317722ab42f5f92529c8965730e5b34b5778155f6a0\"; shbts=\"1630357053\\05448365060212\\0541661893053:01f7adc1e27a876b45859b46fe1b24bf8db81f0b86f1105375e8c292fda91154786e7657\"; rur=\"ASH\\05448365060212\\0541661959555:01f76da5c319cde704dc613dcf914f155e5b8018fb0e814dc8d35cd650ff4468951f2878\"";
-        cok = "mid=YYrdhgALAAEYiXPu0PW6m2YdYCKQ; ig_did=708EBF26-AFEE-4E07-BCB4-07E6C33C6979; csrftoken=IDl7KmC5Bg2tGJji0QvMYwVNwkTNROCt; ds_user_id=38081432117; sessionid=38081432117%3AMItMyvUQgRzJSl%3A27; shbid=\"2510\\05438081432117\\0541673551394:01f77485ff1ce56d575923891e5eda811d17219daf0b65414bc72a31b1bc399eee5d27e3\"; shbts=\"1642015394\\05438081432117\\0541673551394:01f772cd5bdc8a5b766bab05dda37f727bc8f4f20f3d8c9d0b8e959321bd51b7b1e02f1d\"; rur=\"RVA\\05438081432117\\0541673619478:01f74933844bc71dd5b679f47ba2497594f7300fc5894712b6cd920e0db84e18faea3e40\"";
+        cok = "mid=YiQXKwALAAGdKGjreR2mwXduEETd; ig_did=84B42C62-D301-495A-ABA5-B8DBF93A2E3C; shbid=\"18799\\05446965647003\\0541678068404:01f74ebfdb3d350d833eb147a5268e02b9d28cc8004bc1d60f676d2377dc0d88b10c1e20\"; shbts=\"1646532404\\05446965647003\\0541678068404:01f759759fee21a6e0c2a9cce48e41692283381101c1fe289639f7967ae3bb5ba11795c1\"; csrftoken=p4BkbmZ8YiuyEt19Z48U9vv0Yt0QGQ74; ds_user_id=46965647003; sessionid=46965647003%3AhdFxDdkVYyxtgn%3A6; rur=\"FRC\\05446965647003\\0541678224423:01f782a30366f38c8cb1dc46f37a87145ebe25cba7a7be2ff42d25e4b5d64f58cfb64de9\"";
 
-
-
+        Thread
+                .sleep(10*1000);
 
         System.out.println(s);
         WithUrlLoggedCommnets.main(repository, shortcode, cok, s);

@@ -82,7 +82,7 @@ public class WithUrlLoggedCommnets {
             System.out.println();
 
             try {
-                Thread.sleep(1000*5);
+                Thread.sleep(1000*25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

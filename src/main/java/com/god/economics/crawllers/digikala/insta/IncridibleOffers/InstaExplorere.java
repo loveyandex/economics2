@@ -99,9 +99,7 @@ public class InstaExplorere {
 
 
             System.out.println();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
